@@ -1,0 +1,72 @@
+[tool.ruff]
+target-version = "py311"
+extend-exclude = [".venv"]
+line-length = 100
+
+# https://docs.astral.sh/ruff/rules/#error-e
+select = [
+  "E", # Error
+  "F", # Pyflakes
+  "B", # flake8-bugbear
+  "Q", # flake8-quotes
+  "I", # Isort
+  "N", # pep8-naming
+  "ANN", # flake8-annotations 
+  "ASYNC", # flake8-async
+  "ARG", # flake8-unused-arguments
+  "S", # flake8-bandit
+  "C4", # flake8-comprehensions
+  "ICN", # flake8-import-conventions
+  "PIE", # flake8-pie
+  "PT", # flake8-pytest-style
+  "PTH", # flake8-use-pathlib
+  "SIM", # flake8-simplify
+  "C90",  # mccabe for complexicty
+]
+
+ignore = [
+  "ANN101", # missing-type-self
+  "ANN102", # missing-type-cls
+  "ANN204", # Missing return type annotation for special method `__init__
+  "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
+]
+
+[tool.ruff.extend-per-file-ignores]
+"test*" = [
+  "S101", # Allow use of asserts in tests
+]
+
+[tool.ruff.flake8-annotations]
+allow-star-arg-any = true
+
+[tool.ruff.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.ruff.flake8-builtins]
+builtins-ignorelist = ["id"]
+
+[tool.ruff.flake8-comprehensions]
+allow-dict-calls-with-keyword-arguments = true
+
+[tool.ruff.mccabe]
+max-complexity = 8
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
+
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+no_implicit_reexport = true
+
+# for strict mypy: (this is the tricky one :-))
+disallow_untyped_defs = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
