@@ -1,11 +1,13 @@
 local lspconfig = require("lspconfig")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 local on_attach = function(client, bufnr)
   require("navigator.lspclient.mapping").setup({ client = client, bufnr = bufnr }) -- setup navigator keymaps here,
   require("navigator.dochighlight").documentHighlight(bufnr)
   require("navigator.codeAction").code_action_prompt(bufnr)
 end
+
 
 -- Pylsp
 local venv_path = os.getenv("VIRTUAL_ENV")
@@ -45,7 +47,10 @@ lspconfig.pylsp.setup({
           live_mode = false,
         },
         -- auto-completion options
-        jedi_completion = { fuzzy = true },
+        jedi_completion = {
+          fuzzy = true,
+          enabled = true,
+        },
         rope = { enabled = true },
         rope_autoimport = { enabled = false },
         isort = { enabled = false },
@@ -58,11 +63,27 @@ lspconfig.pylsp.setup({
 })
 
 lspconfig.pyright.setup({
+  handlers = {
+    ["textDocument/publishDiagnostics"] = function(...) end,
+  },
+  on_attach = function(client, bufnr)
+    require("navigator.lspclient.mapping").setup({ client = client, bufnr = bufnr }) -- setup navigator keymaps here,
+    require("navigator.dochighlight").documentHighlight(bufnr)
+    require("navigator.codeAction").code_action_prompt(bufnr)
+    client.server_capabilities.codeActionProvider = false
+  end,
   settings = {
-    args = {
-      "--config foo"
-    }
-  }
+    pyright = {
+      disableOrganizeImports = true,
+    },
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        typeCheckingMode = "basic",
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
 })
 
 lspconfig.ruff_lsp.setup({

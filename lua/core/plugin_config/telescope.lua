@@ -13,4 +13,4 @@ vim.keymap.set('n', '<Space>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<Space>fh', builtin.help_tags, {})
 
 vim.keymap.set('n', 'yh', "<cmd>Telescope yank_history<CR>", {})
-vim.keymap.set('n', 'hs', "<cmd>Telescope spell_suggest<CR>", {})
+vim.keymap.set('n', '<leader>ss', "<cmd>Telescope spell_suggest<CR>", {})

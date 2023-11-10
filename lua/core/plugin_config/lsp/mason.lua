@@ -19,11 +19,11 @@ require("mason-lspconfig").setup(
       "terraformls",
       "svelte",
       "clojure_lsp",
-      -- python.lua
+      -- IN python.lua
       "pylsp", -- :PylspInstall pyls-flake8 pylsp-mypy pyls-isort, ...
-      "pyright",
+      "pyright", -- :PylspInstall pyls-flake8 pylsp-mypy pyls-isort, ...
       "ruff_lsp",
-      -- ltex.lua
+      -- IN ltex.lua
       "ltex",
     }
   }
@@ -97,6 +97,15 @@ lspconfig.dotls.setup({
   capabilities = capabilities,
 })
 lspconfig.terraformls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {
+    "terraform",
+    "tf",
+    "hcl",
+  }
+})
+lspconfig.tflint.setup({
   on_attach = on_attach,
   capabilities = capabilities,
 })

@@ -30,9 +30,11 @@ local plugins = {
   "christoomey/vim-tmux-navigator",
   "tpope/vim-fugitive",
   "tpope/vim-commentary",
+  "stevearc/dressing.nvim",
+  "rcarriga/nvim-notify",
+  -- Helpers
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
   },
   "vim-scripts/ReplaceWithRegister",
@@ -42,11 +44,10 @@ local plugins = {
       "kkharji/sqlite.lua"
     }
   },
-  "stevearc/dressing.nvim",
-  "rcarriga/nvim-notify",
   "windwp/nvim-autopairs",
   "windwp/nvim-ts-autotag",
   "Pocco81/auto-save.nvim",
+  "chentoast/marks.nvim",
 
   -- python
   {
@@ -85,7 +86,6 @@ local plugins = {
   -- telescope
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.0",
     dependencies = { { "nvim-lua/plenary.nvim", } }
   },
   {
@@ -95,8 +95,20 @@ local plugins = {
   -- buffers
   {
     "akinsho/bufferline.nvim",
-    version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
+  },
+  -- DB
+  {
+    "kndndrj/nvim-dbee",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    build = function()
+    -- Install tries to automatically detect the install method.
+    -- if it fails, try calling it with one of these parameters:
+    --    "curl", "wget", "bitsadmin", "go"
+    require("dbee").install()
+  end,
   },
 }
 

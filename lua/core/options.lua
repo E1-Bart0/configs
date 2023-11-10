@@ -7,6 +7,9 @@ vim.opt.autoindent = true -- copy indent from current line when starting new one
 -- line wrapping
 vim.opt.wrap = false -- disable line wrapping
 
+-- Vertical Line
+vim.opt.colorcolumn = '100'
+
 -- search settings
 vim.opt.ignorecase = true -- ignore case when searching
 vim.opt.smartcase = true  -- if you include mixed case in your search, assumes you want case-sensitiv
