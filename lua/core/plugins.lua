@@ -34,9 +34,27 @@ local plugins = {
   "nvim-lualine/lualine.nvim",
   -- Treesitter
   "nvim-treesitter/nvim-treesitter",
+  -- Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim", },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make", }
+    }
+  },
 
-  "lewis6991/gitsigns.nvim",
-  "tpope/vim-fugitive",
+  -- Git
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      "ibhagwan/fzf-lua",              -- optional
+      "lewis6991/gitsigns.nvim",       -- optional
+    },
+    config = true
+  },
 
   -- Tmux integration
   "preservim/vimux",
@@ -102,17 +120,6 @@ local plugins = {
         "neovim/nvim-lspconfig"
       },
     },
-  },
-  -- telescope
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    }
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
   },
   -- buffers
   {
