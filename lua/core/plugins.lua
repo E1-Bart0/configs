@@ -13,26 +13,38 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   "wbthomason/packer.nvim",
+
+  -- Themes
   "ellisonleao/gruvbox.nvim",
   "rebelot/kanagawa.nvim",
+  "bluz71/vim-nightfly-colors",
   {
     "dracula/vim",
     lazy = false,
   },
-  "nvim-tree/nvim-tree.lua",
-  "nvim-tree/nvim-web-devicons",
+  -- NvimTree
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "nvim-lua/plenary.nvim",
+    }
+  },
+  -- Lualine
   "nvim-lualine/lualine.nvim",
+  -- Treesitter
   "nvim-treesitter/nvim-treesitter",
-  "bluz71/vim-nightfly-colors",
-  "vim-test/vim-test",
+
   "lewis6991/gitsigns.nvim",
+  "tpope/vim-fugitive",
+
+  -- Tmux integration
   "preservim/vimux",
   "christoomey/vim-tmux-navigator",
-  "tpope/vim-fugitive",
+
+  -- Helpers
   "tpope/vim-commentary",
   "stevearc/dressing.nvim",
-  "rcarriga/nvim-notify",
-  -- Helpers
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
@@ -48,8 +60,9 @@ local plugins = {
   "windwp/nvim-ts-autotag",
   "Pocco81/auto-save.nvim",
   "chentoast/marks.nvim",
+  "rcarriga/nvim-notify",
 
-  -- python
+  -- Pytest
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -61,13 +74,18 @@ local plugins = {
   },
 
   -- completion
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "L3MON4D3/LuaSnip",
-  "saadparwaiz1/cmp_luasnip",
-  "rafamadriz/friendly-snippets",
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "rafamadriz/friendly-snippets",
+    }
+  },
+
   -- mason (lsp servers)
   "williamboman/mason.nvim",
   "neovim/nvim-lspconfig",
@@ -80,13 +98,17 @@ local plugins = {
         "ray-x/guihua.lua",
         run = "cd lua/fzy && make"
       },
-      { "neovim/nvim-lspconfig" },
+      {
+        "neovim/nvim-lspconfig"
+      },
     },
   },
   -- telescope
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = { { "nvim-lua/plenary.nvim", } }
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    }
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -95,8 +117,11 @@ local plugins = {
   -- buffers
   {
     "akinsho/bufferline.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons"
+    },
   },
+
   -- DB
   {
     "kndndrj/nvim-dbee",
@@ -104,12 +129,11 @@ local plugins = {
       "MunifTanjim/nui.nvim",
     },
     build = function()
-    -- Install tries to automatically detect the install method.
-    -- if it fails, try calling it with one of these parameters:
-    --    "curl", "wget", "bitsadmin", "go"
-    require("dbee").install()
-  end,
+      require("dbee").install()
+    end,
   },
+  -- Others
+  "vim-test/vim-test",
 }
 
 local opts = {}

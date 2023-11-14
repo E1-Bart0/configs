@@ -11,7 +11,7 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping.select_next_item(),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['ç'] = cmp.mapping.complete(), -- show completion suggersion ALT + C
+    ['ç'] = cmp.mapping.complete(),  -- show completion suggersion ALT + C
     ['<C-e>'] = cmp.mapping.abort(), -- close complete window
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
   }),
@@ -34,4 +34,17 @@ cmp.setup({
       ellipsis_char = "...",
     }),
   },
+})
+
+cmp.setup.cmdline({ "/", "?" }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = { { name = "buffer" } }
+})
+
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources(
+    { { name = "buffer" } },
+    { { name = "cmdline" } }
+  )
 })
