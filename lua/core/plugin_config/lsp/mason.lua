@@ -105,10 +105,6 @@ lspconfig.terraformls.setup({
     "hcl",
   }
 })
-lspconfig.tflint.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-})
 lspconfig.svelte.setup({
   on_attach = on_attach,
   capabilities = capabilities,

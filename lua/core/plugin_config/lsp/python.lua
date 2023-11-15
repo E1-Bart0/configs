@@ -8,6 +8,17 @@ local on_attach = function(client, bufnr)
   require("navigator.codeAction").code_action_prompt(bufnr)
 end
 
+lspconfig.ruff_lsp.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  init_options = {
+    settings = {
+      args = {
+        "--config=/Users/vadim/.config/nvim/pyproject.toml"
+      },
+    }
+  }
+})
 
 -- Pylsp
 local venv_path = os.getenv("VIRTUAL_ENV")
@@ -31,7 +42,7 @@ lspconfig.pylsp.setup({
           enabled = true,
           line_length = 100,
         },
-        autopep8 = { enabled = true },
+        autopep8 = { enabled = false },
         yapf = { enabled = true },
         -- linter options
         flake8 = { enabled = false },
@@ -48,10 +59,18 @@ lspconfig.pylsp.setup({
         },
         -- auto-completion options
         jedi_completion = {
-          fuzzy = true,
+          fuzzy = false,
           enabled = true,
         },
+        rename = {
+          enabled = false
+        },
         rope = { enabled = true },
+        rope_rename = { enabled = false },
+        rope_completion = {
+          enabled = true,
+          eager = true,
+        },
         rope_autoimport = { enabled = false },
         isort = { enabled = false },
       },
@@ -66,6 +85,7 @@ lspconfig.pyright.setup({
   handlers = {
     ["textDocument/publishDiagnostics"] = function(...) end,
   },
+  capabilities = capabilities,
   on_attach = function(client, bufnr)
     require("navigator.lspclient.mapping").setup({ client = client, bufnr = bufnr }) -- setup navigator keymaps here,
     require("navigator.dochighlight").documentHighlight(bufnr)
@@ -79,21 +99,9 @@ lspconfig.pyright.setup({
     python = {
       analysis = {
         autoSearchPaths = true,
-        typeCheckingMode = "basic",
+        typeCheckingMode = "off",
         useLibraryCodeForTypes = true,
       },
     },
   },
-})
-
-lspconfig.ruff_lsp.setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  init_options = {
-    settings = {
-      args = {
-        "--config=/Users/vadim/.config/nvim/pyproject.toml"
-      },
-    }
-  }
 })

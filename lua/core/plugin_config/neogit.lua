@@ -59,5 +59,6 @@ require('neogit').setup({
 
 vim.keymap.set("n", "<leader>gg", "<cmd>Neogit kind=split<CR>")
 vim.keymap.set("n", "<leader>gl", "<cmd>Neogit log<CR>")
+vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory %<CR>")
 vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<CR>")
 vim.keymap.set("n", "<leader>gD", "<cmd>DiffviewOpen master<CR>")

@@ -17,6 +17,7 @@ require('nvim-treesitter.configs').setup {
     "rust",
     "soql",
     "sql",
+    "terraform",
     "toml",
     "vim",
     "xml",
@@ -33,8 +34,3 @@ require('nvim-treesitter.configs').setup {
     enable = true
   }
 }
-
--- Folds
-vim.cmd [[ set foldmethod=expr ]]
-vim.cmd [[ set foldexpr=nvim_treesitter#foldexpr() ]]
-vim.cmd [[ set nofoldenable  ]]
