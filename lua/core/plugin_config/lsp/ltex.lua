@@ -77,10 +77,35 @@ local lspconfig = require("lspconfig")
 local wkspc = "workspace/didChangeConfiguration"
 -- instead of looping through the list of clients and check client.name == 'ltex' (which many solutions out there are doing)
 -- We attach the command function to the bufer then ltex is loaded
-local function on_attach(client, bufnr)
-  require("navigator.lspclient.mapping").setup({ client = client, bufnr = bufnr }) -- setup navigator keymaps here,
-  require("navigator.dochighlight").documentHighlight(bufnr)
-  require("navigator.codeAction").code_action_prompt(bufnr)
+local keymap = vim.keymap -- for conciseness
+local opts = { noremap = true, silent = true }
+local on_attach = function(client, bufnr)
+  opts.buffer = bufnr
+  -- set keybinds
+  opts.desc = "See available code actions"
+  keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+
+  opts.desc = "Smart rename"
+  keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) 
+
+  opts.desc = "Show buffer diagnostics"
+  keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+
+  opts.desc = "Show line diagnostics"
+  keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+  opts.desc = "Go to previous diagnostic"
+  keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+
+  opts.desc = "Go to next diagnostic"
+  keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+
+  opts.desc = "Show documentation for what is under cursor"
+  keymap.set("n", "<leader>k", vim.lsp.buf.hover, opts)
+
+  opts.desc = "Restart LSP"
+  keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+
   -- the second argumeng is named 'ctx', but we don't need it here
   --- command = {argument={...}, command=..., title=...}
   local addToDict = function(key)

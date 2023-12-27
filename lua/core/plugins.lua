@@ -1,59 +1,58 @@
+-- Installing Lazy if it wasn't installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
+  vim.fn.system {
     "git",
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
     lazypath,
-  })
+  }
 end
 vim.opt.rtp:prepend(lazypath)
+--
 
+-- Specifying plugins
 local plugins = {
-  "wbthomason/packer.nvim",
-
   -- Themes
-  "ellisonleao/gruvbox.nvim",
-  "rebelot/kanagawa.nvim",
-  "bluz71/vim-nightfly-colors",
-  {
-    "dracula/vim",
-    lazy = false,
-  },
+  { "dracula/vim", priority = 1000 },
+
   -- NvimTree
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-lua/plenary.nvim",
-    }
+    },
   },
+
   -- Lualine
   "nvim-lualine/lualine.nvim",
+
   -- Treesitter
   "nvim-treesitter/nvim-treesitter",
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      { "nvim-lua/plenary.nvim", },
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make", }
-    }
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
   },
 
   -- Git
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
+      "nvim-lua/plenary.nvim", -- required
       "nvim-telescope/telescope.nvim", -- optional
-      "sindrets/diffview.nvim",        -- optional
-      "ibhagwan/fzf-lua",              -- optional
-      "lewis6991/gitsigns.nvim",       -- optional
+      "sindrets/diffview.nvim", -- optional
+      "ibhagwan/fzf-lua", -- optional
+      "lewis6991/gitsigns.nvim", -- optional
     },
-    config = true
+    config = true,
   },
 
   -- Tmux integration
@@ -62,15 +61,12 @@ local plugins = {
 
   -- Helpers
   "tpope/vim-commentary",
-  "stevearc/dressing.nvim",
-  {
-    "kylechui/nvim-surround",
-    event = "VeryLazy",
-  },
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
+  { "kylechui/nvim-surround", event = "VeryLazy" },
   "vim-scripts/ReplaceWithRegister",
   {
     "gbprod/yanky.nvim",
-    dependencies = { "kkharji/sqlite.lua" }
+    dependencies = { "kkharji/sqlite.lua" },
   },
   "windwp/nvim-autopairs",
   "windwp/nvim-ts-autotag",
@@ -79,9 +75,9 @@ local plugins = {
   "rcarriga/nvim-notify",
   {
     "kevinhwang91/nvim-ufo", -- Folding
-    dependencies = { "kevinhwang91/promise-async", }
+    dependencies = { "kevinhwang91/promise-async" },
   },
-  "lukas-reineke/indent-blankline.nvim",
+  { "lukas-reineke/indent-blankline.nvim", version="3.3.3"},
   "Wansmer/treesj",
 
   -- Pytest
@@ -106,30 +102,36 @@ local plugins = {
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
-    }
-  },
-
-  -- mason (lsp servers)
-  "williamboman/mason.nvim",
-  "neovim/nvim-lspconfig",
-  "onsails/lspkind.nvim",
-  "williamboman/mason-lspconfig.nvim",
-  {
-    "ray-x/navigator.lua",
-    dependencies = {
-      {
-        "ray-x/guihua.lua",
-        run = "cd lua/fzy && make"
-      },
-      { "neovim/nvim-lspconfig" },
-      { "ray-x/lsp_signature.nvim" },
+      "onsails/lspkind.nvim",
     },
   },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {},
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
+  },
+
+  -- formatting
+  { "stevearc/conform.nvim", lazy = true },
+
+  -- mason and lsp servers
+  "neovim/nvim-lspconfig",
+  {
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
+  },
+
   -- buffers
   {
     "akinsho/bufferline.nvim",
     dependencies = {
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
     },
   },
 
@@ -139,10 +141,12 @@ local plugins = {
     dependencies = {
       "MunifTanjim/nui.nvim",
     },
+    event = "VeryLazy",
     build = function()
       require("dbee").install()
     end,
   },
+
   -- Others
   "vim-test/vim-test",
 }

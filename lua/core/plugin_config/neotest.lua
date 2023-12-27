@@ -1,6 +1,7 @@
 local venv_path = os.getenv("VIRTUAL_ENV")
+
 local py_path = nil
--- decide which python executable to use for mypy
+-- decide which python executable to use for pytest
 if venv_path ~= nil then
   py_path = venv_path .. "/bin/python3"
 else
@@ -16,7 +17,7 @@ neotest.setup({
       dap = { justMyCode = false },
       -- Command line arguments for runner
       -- Can also be a function to return dynamic values
-      args = { "-vvv", "--log-level", "INFO", },
+      args = {},
       -- Runner to use. Will use pytest if available by default.
       -- Can be a function to return dynamic value.
       runner = "pytest",
