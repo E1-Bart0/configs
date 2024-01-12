@@ -53,6 +53,9 @@ allow-dict-calls-with-keyword-arguments = true
 [tool.ruff.mccabe]
 max-complexity = 8
 
+[tool.ruff.format]
+docstring-code-format = true
+
 [tool.mypy]
 follow_imports = "silent"
 warn_redundant_casts = true

@@ -60,6 +60,7 @@ local plugins = {
   "christoomey/vim-tmux-navigator",
 
   -- Helpers
+  { "dstein64/nvim-scrollview", event = "VeryLazy" },
   "tpope/vim-commentary",
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "kylechui/nvim-surround", event = "VeryLazy" },
@@ -77,7 +78,7 @@ local plugins = {
     "kevinhwang91/nvim-ufo", -- Folding
     dependencies = { "kevinhwang91/promise-async" },
   },
-  { "lukas-reineke/indent-blankline.nvim", version="3.3.3"},
+  { "lukas-reineke/indent-blankline.nvim", version = "3.3.3" },
   "Wansmer/treesj",
 
   -- Pytest
@@ -146,6 +147,18 @@ local plugins = {
       require("dbee").install()
     end,
   },
+
+  -- Markdown
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
+  { "godlygeek/tabular", event = "VeryLazy" },
+  { "preservim/vim-markdown", event = "VeryLazy" },
 
   -- Others
   "vim-test/vim-test",

@@ -14,13 +14,18 @@ conform.setup {
     markdown = { "prettier" },
     graphql = { "prettier" },
     lua = { "stylua" },
-    python = { "isort", "black" },
+    python = { "ruff_format", "isort" },
     terraform = { "terraform_fmt" },
     sql = { "sql_formatter" },
     docker = { "prettier" },
     bash = { "beautysh" },
   },
   format_on_save = nil,
+  formatters = {
+    ruff = {
+      prepend_args = { "format", "--config", "/Users/vadim/.config/nvim/pyproject.toml" },
+    },
+  },
 }
 
 vim.keymap.set({ "n", "v" }, "<leader>ff", function()
