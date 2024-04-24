@@ -14,7 +14,7 @@ conform.setup {
     markdown = { "prettier" },
     graphql = { "prettier" },
     lua = { "stylua" },
-    python = { "ruff_format", "isort" },
+    python = { "ruff_format" },
     terraform = { "terraform_fmt" },
     sql = { "sql_formatter" },
     docker = { "prettier" },

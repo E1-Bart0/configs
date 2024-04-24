@@ -37,6 +37,7 @@ require("mason-tool-installer").setup {
     "eslint_d", -- js linter
     "sql-formatter", -- sql
     "taplo", -- toml
+    "vacuum", -- OPENAPI 3
   },
 }
 

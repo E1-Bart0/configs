@@ -78,14 +78,16 @@ local plugins = {
     "kevinhwang91/nvim-ufo", -- Folding
     dependencies = { "kevinhwang91/promise-async" },
   },
-  { "lukas-reineke/indent-blankline.nvim", version = "3.3.3" },
+  { "lukas-reineke/indent-blankline.nvim" },
   "Wansmer/treesj",
+  "mbbill/undotree",
 
   -- Pytest
   {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/neotest-python",
+      "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",

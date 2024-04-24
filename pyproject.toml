@@ -2,26 +2,56 @@
 target-version = "py311"
 extend-exclude = [".venv"]
 line-length = 100
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".ipynb_checkpoints",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pyenv",
+  ".pytest_cache",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  ".vscode",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "site-packages",
+  "venv",
+]
 
+[tool.ruff.lint]
 # https://docs.astral.sh/ruff/rules/#error-e
+fixable = ["ALL"]
 select = [
-  "E", # Error
-  "F", # Pyflakes
-  "B", # flake8-bugbear
-  "Q", # flake8-quotes
-  "I", # Isort
-  "N", # pep8-naming
-  "ANN", # flake8-annotations 
+  "E",     # Error
+  "F",     # Pyflakes
+  "B",     # flake8-bugbear
+  "Q",     # flake8-quotes
+  "I",     # Isort
+  "N",     # pep8-naming
+  "ANN",   # flake8-annotations 
   "ASYNC", # flake8-async
-  "ARG", # flake8-unused-arguments
-  "S", # flake8-bandit
-  "C4", # flake8-comprehensions
-  "ICN", # flake8-import-conventions
-  "PIE", # flake8-pie
-  "PT", # flake8-pytest-style
-  "PTH", # flake8-use-pathlib
-  "SIM", # flake8-simplify
-  "C90",  # mccabe for complexicty
+  "ARG",   # flake8-unused-arguments
+  "S",     # flake8-bandit
+  "C4",    # flake8-comprehensions
+  "ICN",   # flake8-import-conventions
+  "PIE",   # flake8-pie
+  "PT",    # flake8-pytest-style
+  "PTH",   # flake8-use-pathlib
+  "SIM",   # flake8-simplify
+  "C90",   # mccabe for complexicty
 ]
 
 ignore = [
@@ -31,26 +61,26 @@ ignore = [
   "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
 ]
 
-[tool.ruff.extend-per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 "test*" = [
   "S101", # Allow use of asserts in tests
   "S105", # Allow hardcoded passwords
   "S106", # Allow hardcoded passwords
 ]
 
-[tool.ruff.flake8-annotations]
+[tool.ruff.lint.flake8-annotations]
 allow-star-arg-any = true
 
-[tool.ruff.flake8-unused-arguments]
+[tool.ruff.lint.flake8-unused-arguments]
 ignore-variadic-names = true
 
-[tool.ruff.flake8-builtins]
+[tool.ruff.lint.flake8-builtins]
 builtins-ignorelist = ["id"]
 
-[tool.ruff.flake8-comprehensions]
+[tool.ruff.lint.flake8-comprehensions]
 allow-dict-calls-with-keyword-arguments = true
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.mccabe]
 max-complexity = 8
 
 [tool.ruff.format]
