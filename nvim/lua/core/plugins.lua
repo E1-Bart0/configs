@@ -81,6 +81,7 @@ local plugins = {
   { "lukas-reineke/indent-blankline.nvim" },
   "Wansmer/treesj",
   "mbbill/undotree",
+  { "folke/which-key.nvim", event = "VeryLazy" },
 
   -- Pytest
   {
@@ -161,9 +162,6 @@ local plugins = {
   },
   { "godlygeek/tabular", event = "VeryLazy" },
   { "preservim/vim-markdown", event = "VeryLazy" },
-
-  -- Others
-  "vim-test/vim-test",
 }
 
 local opts = {}

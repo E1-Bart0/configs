@@ -38,3 +38,7 @@ vim.opt.iskeyword:append("-") -- consider string-string as whole word
 
 -- UndoTree plugin
 vim.o.undofile = true     -- Keep undo between sessions
+
+-- which-key plugin
+vim.o.timeout = true
+vim.o.timeoutlen = 300

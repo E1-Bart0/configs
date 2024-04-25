@@ -1,7 +1,4 @@
-*.log
-.DS_Store
-.null-ls*
-.ruff_cache
-.mypy_cache
-.ropeproject
-.data
+*
+*/
+!nvim/
+!tmux/

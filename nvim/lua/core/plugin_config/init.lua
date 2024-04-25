@@ -19,7 +19,7 @@ require("core.plugin_config.treesitter")
 require("core.plugin_config.treesj")
 require("core.plugin_config.ufo")
 require("core.plugin_config.vimux")
-require("core.plugin_config.vim-test")
+require("core.plugin_config.which-key")
 require("core.plugin_config.yanky")
 
 -- lsp

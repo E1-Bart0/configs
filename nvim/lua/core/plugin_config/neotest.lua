@@ -17,7 +17,7 @@ neotest.setup {
       dap = { justMyCode = false },
       -- Command line arguments for runner
       -- Can also be a function to return dynamic values
-      args = {"-vvv"},
+      args = { "-vvv" },
       -- Runner to use. Will use pytest if available by default.
       -- Can be a function to return dynamic value.
       runner = "pytest",
@@ -36,6 +36,22 @@ neotest.setup {
   },
 }
 
-vim.keymap.set("n", "tr", "<cmd>Neotest run<CR>")
-vim.keymap.set("n", "ts", "<cmd>Neotest summary<CR>")
-vim.keymap.set("n", "to", "<cmd>Neotest output<CR>")
+local wk = require("which-key")
+
+-- stylua: ignore
+wk.register(
+  {
+    t = {
+      name = "Neotest",
+      t = { function() require("neotest").run.run(vim.fn.expand("%")) end, "Run File" },
+      T = { function() require("neotest").run.run(vim.uv.cwd()) end, "Run All Test Files" },
+      r = { function() require("neotest").run.run() end, "Run Nearest" },
+      a = { function() require("neotest").run.attach() end, "Attach" },
+      l = { function() require("neotest").run.run_last() end, "Run Last" },
+      s = { function() require("neotest").summary.toggle() end, "Toggle Summary" },
+      o = { function() require("neotest").output.open({ enter = true, auto_close = true }) end, "Show Output" },
+      O = { function() require("neotest").output_panel.toggle() end, "Toggle Output Panel" },
+      x = { function() require("neotest").run.stop() end, "Stop" },
+    },
+  }, { prefix = "<leader>" }
+)

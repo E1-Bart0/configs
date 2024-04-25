@@ -28,10 +28,14 @@ conform.setup {
   },
 }
 
-vim.keymap.set({ "n", "v" }, "<leader>ff", function()
-  conform.format {
-    lsp_fallback = true,
-    async = true,
-    timeout_ms = 1000,
-  }
-end, { desc = "Format file or range (in visual mode)" })
+local wk = require("which-key")
+
+wk.register {
+  ["ff"] = {
+    function()
+      conform.format { lsp_fallback = true, async = true, timeout_ms = 1000 }
+    end,
+    "Format file or range (in visual mode)",
+    mode = { "n", "v" },
+  },
+}
