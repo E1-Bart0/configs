@@ -3,18 +3,21 @@ local bufferline = require("bufferline")
 
 bufferline.setup {
   options = {
-    buffer_close_icon = '󰅖',
-    modified_icon = '●',
-    close_icon = '',
-    mode = "buffers",     -- set to "tabs" to only show tabpages instead
+    buffer_close_icon = "󰅖",
+    modified_icon = "●",
+    close_icon = "",
+    mode = "buffers", -- set to "tabs" to only show tabpages instead
     offsets = {
       {
         filetype = "NvimTree",
-      }
+      },
     },
-  }
+  },
 }
 
+local wk = require("which-key")
 
-vim.keymap.set('n', 'L', ':BufferLineCycleNext<CR>')
-vim.keymap.set('n', 'H', ':BufferLineCyclePrev<CR>')
+wk.register {
+  ["L"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
+  ["H"] = { ":BufferLineCyclePrev<CR>", "Next Buffer" },
+}

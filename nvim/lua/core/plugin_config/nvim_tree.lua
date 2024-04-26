@@ -1,7 +1,7 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("nvim-tree").setup({
+require("nvim-tree").setup {
   update_cwd = true,
   actions = {
     open_file = {
@@ -21,6 +21,10 @@ require("nvim-tree").setup({
   diagnostics = {
     enable = true,
   },
-})
+}
 
-vim.keymap.set('n', '<c-n>', ':NvimTreeFindFileToggle<CR>')
+local wk = require("which-key")
+
+wk.register {
+  ["<c-n>"] = { ":NvimTreeFindFileToggle<CR>", "Toggle Tree" },
+}

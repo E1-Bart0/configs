@@ -94,10 +94,10 @@ local on_attach = function(client, bufnr)
   opts.desc = "Show line diagnostics"
   keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
-  opts.desc = "Go to previous diagnostic"
+  opts.desc = "Previous diagnostic"
   keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 
-  opts.desc = "Go to next diagnostic"
+  opts.desc = "Next diagnostic"
   keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
   opts.desc = "Show documentation for what is under cursor"

@@ -85,4 +85,7 @@ require("which-key").setup {
     buftypes = {},
     filetypes = {},
   },
+  defaults = {
+    ["<leader>h"] = { name = "+GitSigns" },
+  },
 }
