@@ -2,77 +2,35 @@
 target-version = "py311"
 extend-exclude = [".venv"]
 line-length = 100
-exclude = [
-  ".bzr",
-  ".direnv",
-  ".eggs",
-  ".git",
-  ".git-rewrite",
-  ".hg",
-  ".ipynb_checkpoints",
-  ".mypy_cache",
-  ".nox",
-  ".pants.d",
-  ".pyenv",
-  ".pytest_cache",
-  ".pytype",
-  ".ruff_cache",
-  ".svn",
-  ".tox",
-  ".venv",
-  ".vscode",
-  "__pypackages__",
-  "_build",
-  "buck-out",
-  "build",
-  "dist",
-  "node_modules",
-  "site-packages",
-  "venv",
-]
+show-fixes = true
 
 [tool.ruff.lint]
 # https://docs.astral.sh/ruff/rules/#error-e
-fixable = ["ALL"]
-select = [
-  "E",     # Error
-  "F",     # Pyflakes
-  "B",     # flake8-bugbear
-  "Q",     # flake8-quotes
-  "I",     # Isort
-  "N",     # pep8-naming
-  "ANN",   # flake8-annotations 
-  "ASYNC", # flake8-async
-  "ARG",   # flake8-unused-arguments
-  "S",     # flake8-bandit
-  "C4",    # flake8-comprehensions
-  "ICN",   # flake8-import-conventions
-  "PIE",   # flake8-pie
-  "PT",    # flake8-pytest-style
-  "PTH",   # flake8-use-pathlib
-  "SIM",   # flake8-simplify
-  "C90",   # mccabe for complexicty
-]
-
+select = ["ALL"]
 ignore = [
-  "ANN101", # missing-type-self
-  "ANN102", # missing-type-cls
-  "ANN204", # Missing return type annotation for special method `__init__
-  "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
+  "ANN",     # flake8-annotations
+  "D",       # pydocstyle
+  "EM",      # flake8-errmsg
+  "COM812",  # flake8-commas. Trailing comma missing
+  "ISC001",  # flake8-implicit-str-concat. Checks for implicitly concatenated strings on a single line.
+  "PLR2004", # pylint-refactor. Magic value used in comparison
+  "TRY003",  # tryceratops. Avoid specifying long messages outside the exception class
+  "TRY300",  # tryceratops. Consider moving this statement to an `else` block
 ]
 
 [tool.ruff.lint.extend-per-file-ignores]
 "test*" = [
-  "S101", # Allow use of asserts in tests
-  "S105", # Allow hardcoded passwords
-  "S106", # Allow hardcoded passwords
+  "FBT001",  # flake8-boolean-trap. Boolean-typed positional argument in function definition
+  "PLR0913", # pylint-refactor. Too many arguments in function definition ({c_args} > {max_args})
+  "S101",    # flake8-bandit. Use of assert detected
+  "S105",    # flake8-bandit. Possible hardcoded password
+  "S106",    # flake8-bandit. Possible hardcoded password
+  "S107",    # flake8-bandit. Possible hardcoded password
+  "SLF001",  # flake8-self. Private member accessed: {access}
 ]
 
-[tool.ruff.lint.flake8-annotations]
-allow-star-arg-any = true
-
-[tool.ruff.lint.flake8-unused-arguments]
-ignore-variadic-names = true
+[tool.ruff.lint.flake8-boolean-trap]
+extend-allowed-calls = ["pydantic.Field"]
 
 [tool.ruff.lint.flake8-builtins]
 builtins-ignorelist = ["id"]
@@ -80,13 +38,15 @@ builtins-ignorelist = ["id"]
 [tool.ruff.lint.flake8-comprehensions]
 allow-dict-calls-with-keyword-arguments = true
 
+[tool.ruff.lint.pylint]
+allow-magic-value-types = ["int"]
+
 [tool.ruff.lint.mccabe]
 max-complexity = 8
 
-[tool.ruff.format]
-docstring-code-format = true
 
 [tool.mypy]
+plugins = ["pydantic.mypy"]
 follow_imports = "silent"
 warn_redundant_casts = true
 warn_unused_ignores = true
@@ -96,3 +56,8 @@ no_implicit_reexport = true
 
 # for strict mypy: (this is the tricky one :-))
 disallow_untyped_defs = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = false
+warn_required_dynamic_aliases = false

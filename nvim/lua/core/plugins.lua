@@ -49,7 +49,6 @@ local plugins = {
       "nvim-lua/plenary.nvim", -- required
       "nvim-telescope/telescope.nvim", -- optional
       "sindrets/diffview.nvim", -- optional
-      "ibhagwan/fzf-lua", -- optional
       "lewis6991/gitsigns.nvim", -- optional
     },
     config = true,
@@ -91,7 +90,6 @@ local plugins = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
     },
   },
 

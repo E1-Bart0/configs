@@ -29,6 +29,13 @@ vim.wo.number = true -- shows absolute line number on cursor line (when relative
 -- clipboard
 vim.opt.clipboard:append("unnamedplus") -- use system clipboard as default register
 
+-- autoread
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  command = "if mode() != 'c' | checktime | endif",
+  pattern = { "*" },
+})
+
 -- split windows
 vim.opt.splitright = true -- split vertical window to the right
 vim.opt.splitbelow = true -- split horizontal window to the bottom
