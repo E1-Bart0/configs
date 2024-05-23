@@ -34,16 +34,24 @@ require("gitsigns").setup {
     -- Actions
     map("n", "<leader>hs", gs.stage_hunk, { desc = "Stage hunk" })
     map("n", "<leader>hr", gs.reset_hunk, { desc = "Reset hunk" })
-    map("v", "<leader>hs", function() gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "Stage hunk" })
-    map("v", "<leader>hr", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end, { desc = "Reset hunk" })
+    map("v", "<leader>hs", function()
+      gs.stage_hunk { vim.fn.line("."), vim.fn.line("v") }
+    end, { desc = "Stage hunk" })
+    map("v", "<leader>hr", function()
+      gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") }
+    end, { desc = "Reset hunk" })
     map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage File" })
     map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset File" })
     map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Unstage hunk" })
     map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
-    map("n", "<leader>hb", function() gs.blame_line { full = true } end, { desc = "blame hunk" })
+    map("n", "<leader>hb", function()
+      gs.blame_line { full = true }
+    end, { desc = "blame hunk" })
     map("n", "<leader>hl", gs.toggle_current_line_blame, { desc = "Toggle Blaming current line" })
     map("n", "<leader>hd", gs.diffthis, { desc = "Diff this" })
-    map("n", "<leader>hD", function() gs.diffthis("~") end, { desc = "Diff this ~" })
+    map("n", "<leader>hD", function()
+      gs.diffthis("~")
+    end, { desc = "Diff this ~" })
     map("n", "<leader>ht", gs.toggle_deleted, { desc = "Toggle deleted" })
 
     -- Text object
@@ -53,16 +61,10 @@ require("gitsigns").setup {
 
 require("neogit").setup {
   {
-    signs = {
-      -- { CLOSED, OPENED }
-      section = { "", "" },
-      item = { "", "" },
-      hunk = { "", "" },
-    },
     integrations = {
       telescope = true,
       diffview = true,
-      fzf_lua = true,
+      fzf_lua = false,
     },
   },
 }
@@ -74,9 +76,5 @@ wk.register({
     h = { "<cmd>DiffviewFileHistory %<CR>", "View file history" },
     o = { "<cmd>DiffviewOpen<CR>", "Open Diffview" },
     c = { "<cmd>DiffviewClose<CR>", "Close Diffview" },
-    q = { "<cmd>VimuxCloseRunner<CR>", "Close tmux runner" },
-    x = { "<cmd>VimuxInterruptRunner<CR>", "Interrupt command in the runner" },
-    z = { "<cmd>VimuxZoomRunner<CR>", "Zoom" },
-    cl = { "<cmd>VimuxClearTerminalScreen<CR>", "Clear the terminal screen" },
   },
 }, { prefix = "<leader>" })

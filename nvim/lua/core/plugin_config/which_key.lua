@@ -1,4 +1,6 @@
-require("which-key").setup {
+local wk = require("which-key")
+
+wk.setup {
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -89,3 +91,33 @@ require("which-key").setup {
     ["<leader>h"] = { name = "+GitSigns" },
   },
 }
+
+-- Keymaping
+wk.register {
+  x = { '"_x', "Not save in clipboard" },
+  ["<leader>+"] = { "<C-a>", "Increment number" },
+  ["<leader>-"] = { "<C-x>", "Decrement number" },
+}
+-- Keymaping
+wk.register({
+  n = {
+    h = { ":nohlsearch<CR>", "Clear highlights" },
+    n = {
+      function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      end,
+      "Toggle inline hints",
+    },
+  },
+}, { prefix = "<leader>" })
+
+-- Splitting windows
+wk.register({
+  s = {
+    name = "Split Window",
+    v = { "<C-w>v", "Split window vertically" },
+    h = { "<C-w>s", "Split window horizontally" },
+    e = { "<C-w>=", "Make split window equal width" },
+    q = { ":close<CR>", "Close current split window" },
+  },
+}, { prefix = "<leader>" })

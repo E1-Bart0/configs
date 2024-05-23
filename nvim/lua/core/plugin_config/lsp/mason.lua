@@ -20,7 +20,7 @@ require("mason-lspconfig").setup {
     "clojure_lsp",
     -- Python
     "pylsp", -- :PylspInstall pyls-flake8 pylsp-mypy pyls-isort, ...
-    "pyright",
+    -- "pyright",
     "ruff_lsp",
     -- IN ltex.lua
     "ltex",
@@ -217,6 +217,8 @@ lspconfig.clojure_lsp.setup {
 
 -- PYTHON
 
+-- Ruff
+
 lspconfig.ruff_lsp.setup {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -230,6 +232,7 @@ lspconfig.ruff_lsp.setup {
 }
 
 -- Pylsp
+
 local venv_path = os.getenv("VIRTUAL_ENV")
 local py_path = nil
 -- decide which python executable to use for mypy
@@ -262,19 +265,18 @@ lspconfig.pylsp.setup {
           enabled = true,
           dmypy = false,
           overrides = { "--python-executable", py_path, true },
-          report_progress = true,
           live_mode = false,
         },
         -- auto-completion options
         jedi_completion = {
-          fuzzy = false,
+          fuzzy = true,
           enabled = true,
         },
         rename = {
           enabled = false,
         },
         rope = { enabled = true },
-        rope_rename = { enabled = false },
+        rope_rename = { enabled = true },
         rope_completion = {
           enabled = true,
           eager = true,
@@ -289,7 +291,9 @@ lspconfig.pylsp.setup {
   },
 }
 
-lspconfig.pyright.setup {
+-- Pyright
+
+lspconfig.basedpyright.setup {
   handlers = {
     ["textDocument/publishDiagnostics"] = function(...) end,
   },
@@ -304,6 +308,7 @@ lspconfig.pyright.setup {
         autoSearchPaths = true,
         typeCheckingMode = "off",
         useLibraryCodeForTypes = true,
+        ignore = { "*" },
       },
     },
   },

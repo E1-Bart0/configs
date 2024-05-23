@@ -5,6 +5,10 @@ wk.register({
     name = "Vimux",
     o = { "<cmd>VimuxOpenRunner<CR>", "Open tmux runner" },
     r = { "<cmd>VimuxPromptCommand<CR>", "Prompt a command to run" },
+    p = {
+      '<cmd>VimuxRunCommand("clear;PYTHONPATH=\\"${PYTHONPATH}:${pwd}\\" python " . bufname("%"))<CR>',
+      "Python run current file",
+    },
     l = { "<cmd>VimuxRunLastCommand<CR>", "Run last command" },
     i = { "<cmd>VimuxInspectRunner<CR>", "Inspect runner pane" },
     q = { "<cmd>VimuxCloseRunner<CR>", "Close tmux runner" },
