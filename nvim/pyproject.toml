@@ -61,3 +61,24 @@ disallow_untyped_defs = true
 init_forbid_extra = true
 init_typed = false
 warn_required_dynamic_aliases = false
+
+
+[tool.sqlfluff.core]
+dialect = "postgres"
+templater = "raw"
+max_line_length = 120
+verbose = 0
+fix_even_unparsable = true
+
+[tool.sqlfluff.indentation]
+indent_unit = "space"
+tab_space_size = 2
+indented_joins = false
+indented_using_on = true
+template_blocks_indent = false
+
+[tool.sqlfluff.templater]
+unwrap_wrapped_queries = false
+
+[tool.sqlfluff.rules.capitalisation.keywords]
+capitalisation_policy = "upper"

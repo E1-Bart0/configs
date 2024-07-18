@@ -39,19 +39,17 @@ neotest.setup {
 local wk = require("which-key")
 
 -- stylua: ignore
-wk.register(
-  {
-    t = {
-      name = "Neotest",
-      t = { function() require("neotest").run.run(vim.fn.expand("%")) end, "Run File" },
-      T = { function() require("neotest").run.run(vim.uv.cwd()) end, "Run All Test Files" },
-      r = { function() require("neotest").run.run() end, "Run Nearest" },
-      a = { function() require("neotest").run.attach() end, "Attach" },
-      l = { function() require("neotest").run.run_last() end, "Run Last" },
-      s = { function() require("neotest").summary.toggle() end, "Toggle Summary" },
-      o = { function() require("neotest").output.open({ enter = true, auto_close = true }) end, "Show Output" },
-      O = { function() require("neotest").output_panel.toggle() end, "Toggle Output Panel" },
-      x = { function() require("neotest").run.stop() end, "Stop" },
-    },
-  }, { prefix = "<leader>" }
+wk.add(
+{
+    { "<leader>t", group = "Neotest" },
+    { "<leader>tO", function() neotest.output_panel.toggle() end, desc = "Toggle Output Panel" },
+    { "<leader>tT", function() neotest.run.run(vim.uv.cwd()) end, desc = "Run All Test Files" },
+    { "<leader>ta", function() neotest.run.attach() end, desc = "Attach" },
+    { "<leader>tl", function() neotest.run.run_last() end, desc = "Run Last" },
+    { "<leader>to", function() neotest.output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
+    { "<leader>tr", function() neotest.run.run() end, desc = "Run Nearest" },
+    { "<leader>ts", function() neotest.summary.toggle() end, desc = "Toggle Summary" },
+    { "<leader>tt", function() neotest.run.run(vim.fn.expand("%")) end, desc = "Run File" },
+    { "<leader>tx", function() neotest.run.stop() end, desc = "Stop" },
+  }
 )

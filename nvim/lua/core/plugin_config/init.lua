@@ -1,6 +1,7 @@
 require("core.plugin_config.autopairs")
 require("core.plugin_config.autosave")
 require("core.plugin_config.bufferline")
+require("core.plugin_config.comments")
 require("core.plugin_config.completions")
 require("core.plugin_config.dbee")
 require("core.plugin_config.dressing")

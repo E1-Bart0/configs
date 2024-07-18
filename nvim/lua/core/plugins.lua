@@ -60,7 +60,8 @@ local plugins = {
 
   -- Helpers
   { "dstein64/nvim-scrollview", event = "VeryLazy" },
-  "tpope/vim-commentary",
+  { "numToStr/Comment.nvim", event = "VeryLazy" },
+  -- "tpope/vim-commentary",
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "kylechui/nvim-surround", event = "VeryLazy" },
   "vim-scripts/ReplaceWithRegister",

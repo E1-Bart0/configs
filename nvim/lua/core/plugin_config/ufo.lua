@@ -42,7 +42,7 @@ ufo.setup {
 --
 local wk = require("which-key")
 
-wk.register {
-  ["zR"] = { ufo.openAllFolds, "Open All Folds" },
-  ["zM"] = { ufo.closeAllFolds, "Close All Folds" },
+wk.add {
+  { "zM", ufo.closeAllFolds, desc = "Close All Folds" },
+  { "zR", ufo.openAllFolds, desc = "Open All Folds" },
 }

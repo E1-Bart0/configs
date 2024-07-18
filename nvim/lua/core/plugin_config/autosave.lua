@@ -1,1 +1,1 @@
-require("auto-save").setup({})
+require("auto-save").setup {}

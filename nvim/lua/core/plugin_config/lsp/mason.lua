@@ -15,7 +15,6 @@ require("mason-lspconfig").setup {
     "sqlls",
     "graphql",
     "dotls",
-    "terraformls",
     "svelte",
     "clojure_lsp",
     -- Python
@@ -32,10 +31,8 @@ require("mason-tool-installer").setup {
   ensure_installed = {
     "prettier", -- prettier formatter
     "stylua", -- lua formatter
-    "isort", -- python formatter
-    "pylint", -- python linter
     "eslint_d", -- js linter
-    "sql-formatter", -- sql
+    "sqlfluff", -- sql
     "taplo", -- toml
     "vacuum", -- OPENAPI 3
   },

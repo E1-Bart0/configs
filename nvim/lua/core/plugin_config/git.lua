@@ -69,12 +69,11 @@ require("neogit").setup {
   },
 }
 
-wk.register({
-  g = {
-    name = "NeoGit",
-    g = { "<cmd>Neogit kind=split<CR>", "Open NeoGit" },
-    h = { "<cmd>DiffviewFileHistory %<CR>", "View file history" },
-    o = { "<cmd>DiffviewOpen<CR>", "Open Diffview" },
-    c = { "<cmd>DiffviewClose<CR>", "Close Diffview" },
-  },
-}, { prefix = "<leader>" })
+wk.add {
+  { "<leader>h", group = "GitSigns" },
+  { "<leader>g", group = "NeoGit" },
+  { "<leader>gc", "<cmd>DiffviewClose<CR>", desc = "Close Diffview" },
+  { "<leader>gg", "<cmd>Neogit kind=split<CR>", desc = "Open NeoGit" },
+  { "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", desc = "View file history" },
+  { "<leader>go", "<cmd>DiffviewOpen<CR>", desc = "Open Diffview" },
+}

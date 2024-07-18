@@ -16,7 +16,7 @@ conform.setup {
     lua = { "stylua" },
     python = { "ruff_format" },
     terraform = { "terraform_fmt" },
-    sql = { "sql_formatter" },
+    sql = { "sqlfluff" },
     docker = { "prettier" },
     bash = { "beautysh" },
   },
@@ -25,17 +25,22 @@ conform.setup {
     ruff = {
       prepend_args = { "format", "--config", "/Users/vadim/.config/nvim/pyproject.toml" },
     },
+    sqlfluff = {
+      command = "sqlfluff",
+      args = { "fix", "--config", "/Users/vadim/.config/nvim/pyproject.toml" },
+      stdin = true,
+    },
   },
 }
 
 local wk = require("which-key")
 
-wk.register {
-  ["ff"] = {
-    function()
-      conform.format { lsp_fallback = true, async = true, timeout_ms = 1000 }
-    end,
-    "Format file or range (in visual mode)",
+-- stylua: ignore
+wk.add {
+  {
+    "ff",
+    function() conform.format { lsp_fallback = true, async = true, timeout_ms = 1000 } end,
+    desc = "Format file or range (in visual mode)",
     mode = { "n", "v" },
   },
 }

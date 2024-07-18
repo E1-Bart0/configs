@@ -4,10 +4,8 @@ dbee.setup()
 
 local wk = require("which-key")
 
-wk.register({
-  db = {
-    name = "DBee",
-    o = { dbee.open, "Dbee Open" },
-    c = { dbee.close, "DBee Close" },
-  },
-}, { prefix = "<leader>" })
+wk.add {
+  { "<leader>db", group = "DBee" },
+  { "<leader>dbc", dbee.close, desc = "DBee Close" },
+  { "<leader>dbo", dbee.open, desc = "Dbee Open" },
+}

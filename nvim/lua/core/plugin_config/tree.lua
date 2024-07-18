@@ -25,6 +25,6 @@ require("nvim-tree").setup {
 
 local wk = require("which-key")
 
-wk.register {
-  ["<c-n>"] = { ":NvimTreeFindFileToggle<CR>", "Toggle Tree" },
+wk.add {
+  { "<c-n>", ":NvimTreeFindFileToggle<CR>", desc = "Toggle Tree" },
 }
