@@ -2,6 +2,7 @@ require("mason").setup()
 require("mason-lspconfig").setup {
   ensure_installed = {
     "bashls",
+    "cucumber_language_server",
     "dockerls",
     "docker_compose_language_service",
     "tsserver",
@@ -15,7 +16,6 @@ require("mason-lspconfig").setup {
     "sqlls",
     "graphql",
     "dotls",
-    "terraformls",
     "svelte",
     "clojure_lsp",
     -- Python
@@ -30,14 +30,13 @@ require("mason-lspconfig").setup {
 }
 require("mason-tool-installer").setup {
   ensure_installed = {
-    "prettier", -- prettier formatter
-    "stylua", -- lua formatter
-    "isort", -- python formatter
-    "pylint", -- python linter
     "eslint_d", -- js linter
-    "sql-formatter", -- sql
+    "prettier", -- prettier formatter
+    "sqlfluff", -- sql
+    "stylua", -- lua formatter
     "taplo", -- toml
     "vacuum", -- OPENAPI 3
+    "xmlformatter", -- xml
   },
 }
 
@@ -101,6 +100,8 @@ local on_attach = function(client, bufnr)
   keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 end
 
+foo = 1
+
 -- Change the Diagnostic symbols in the sign column (gutter)
 -- (not in youtube nvim video)
 local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
@@ -130,6 +131,10 @@ lspconfig["lua_ls"].setup {
 }
 
 lspconfig.bashls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+lspconfig.cucumber_language_server.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }

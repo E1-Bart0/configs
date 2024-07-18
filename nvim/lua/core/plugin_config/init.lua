@@ -1,6 +1,7 @@
 require("core.plugin_config.autopairs")
 require("core.plugin_config.autosave")
 require("core.plugin_config.bufferline")
+require("core.plugin_config.comments")
 require("core.plugin_config.completions")
 require("core.plugin_config.dbee")
 require("core.plugin_config.dressing")
@@ -25,3 +26,4 @@ require("core.plugin_config.yanky")
 -- lsp
 require("core.plugin_config.lsp.ltex")
 require("core.plugin_config.lsp.mason")
+require("core.plugin_config.lsp.signature")

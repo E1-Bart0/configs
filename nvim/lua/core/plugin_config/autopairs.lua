@@ -1,13 +1,12 @@
-require("nvim-autopairs").setup(
-  {
-    check_ts = true,
-    ts_config = {
-      lua = { "string" },
-      javascript = { "template_string" },
-      java = false,
-    },
-  }
-)
+require("nvim-autopairs").setup {
+  check_ts = true,
+  ts_config = {
+    java = false,
+    javascript = { "template_string" },
+    lua = { "string" },
+    python = { "string" },
+  },
+}
 -- import nvim-autopairs completion functionality
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 

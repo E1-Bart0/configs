@@ -7,14 +7,12 @@ local builtin = require("telescope.builtin")
 
 local wk = require("which-key")
 
-wk.register({
-  f = {
-    name = "Telescope",
-    f = { builtin.find_files, "Find by name" },
-    t = { builtin.live_grep, "Find by text" },
-    o = { builtin.oldfiles, "Find recent files by name" },
-    h = { builtin.help_tags, "Help" },
-    y = { "<cmd>Telescope yank_history<CR>", "Yank History" },
-    s = { builtin.spell_suggest, "Spell Suggest" },
-  },
-}, { prefix = "<leader>" })
+wk.add {
+  { "<leader>f", group = "Telescope" },
+  { "<leader>ff", builtin.find_files, desc = "Find by name" },
+  { "<leader>fh", builtin.help_tags, desc = "Help" },
+  { "<leader>fo", builtin.oldfiles, desc = "Find recent files by name" },
+  { "<leader>fs", builtin.spell_suggest, desc = "Spell Suggest" },
+  { "<leader>ft", builtin.live_grep, desc = "Find by text" },
+  { "<leader>fy", "<cmd>Telescope yank_history<CR>", desc = "Yank History" },
+}

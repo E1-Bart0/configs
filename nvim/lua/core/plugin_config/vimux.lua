@@ -1,19 +1,18 @@
 local wk = require("which-key")
 
-wk.register({
-  v = {
-    name = "Vimux",
-    o = { "<cmd>VimuxOpenRunner<CR>", "Open tmux runner" },
-    r = { "<cmd>VimuxPromptCommand<CR>", "Prompt a command to run" },
-    p = {
-      '<cmd>VimuxRunCommand("clear;PYTHONPATH=\\"${PYTHONPATH}:${pwd}\\" python " . bufname("%"))<CR>',
-      "Python run current file",
-    },
-    l = { "<cmd>VimuxRunLastCommand<CR>", "Run last command" },
-    i = { "<cmd>VimuxInspectRunner<CR>", "Inspect runner pane" },
-    q = { "<cmd>VimuxCloseRunner<CR>", "Close tmux runner" },
-    x = { "<cmd>VimuxInterruptRunner<CR>", "Interrupt command in the runner" },
-    z = { "<cmd>VimuxZoomRunner<CR>", "Zoom" },
-    cl = { "<cmd>VimuxClearTerminalScreen<CR>", "Clear the terminal screen" },
+wk.add {
+  { "<leader>v", group = "Vimux" },
+  { "<leader>vcl", "<cmd>VimuxClearTerminalScreen<CR>", desc = "Clear the terminal screen" },
+  { "<leader>vi", "<cmd>VimuxInspectRunner<CR>", desc = "Inspect runner pane" },
+  { "<leader>vl", "<cmd>VimuxRunLastCommand<CR>", desc = "Run last command" },
+  { "<leader>vo", "<cmd>VimuxOpenRunner<CR>", desc = "Open tmux runner" },
+  {
+    "<leader>vp",
+    '<cmd>VimuxRunCommand("clear;PYTHONPATH=\\"${PYTHONPATH}:${pwd}\\" python " . bufname("%"))<CR>',
+    desc = "Python run current file",
   },
-}, { prefix = "<leader>" })
+  { "<leader>vq", "<cmd>VimuxCloseRunner<CR>", desc = "Close tmux runner" },
+  { "<leader>vr", "<cmd>VimuxPromptCommand<CR>", desc = "Prompt a command to run" },
+  { "<leader>vx", "<cmd>VimuxInterruptRunner<CR>", desc = "Interrupt command in the runner" },
+  { "<leader>vz", "<cmd>VimuxZoomRunner<CR>", desc = "Zoom" },
+}

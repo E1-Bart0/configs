@@ -1,0 +1,1 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QAdd more tests and scenarios\n Improve code\n Remove httpx\n Not verified Full Okta Auth\\E$"}

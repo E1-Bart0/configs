@@ -20,12 +20,13 @@ treesj.setup {
 local wk = require("which-key")
 
 -- stylua: ignore
-wk.register({
-  b = {
-    name = "Split/Join Block",
-    m = { function() require('treesj').toggle({ split = { recursive = true } }) end, "Toggle block" },
-    M = { treesj.toggle, "Toggle block" },
-    j = { treesj.join, "Join block" },
-    s = { treesj.split, "Split block" },
+wk.add {
+  { "<leader>b", group = "Split/Join Block" },
+  { "<leader>bM", treesj.toggle, desc = "Toggle block" },
+  { "<leader>bj", treesj.join, desc = "Join block" },
+  {
+    "<leader>bm", function() treesj.toggle { split = { recursive = true } } end,
+    desc = "Toggle block",
   },
-}, { prefix = "<leader>" })
+  { "<leader>bs", treesj.split, desc = "Split block" },
+}

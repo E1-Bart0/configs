@@ -13,3 +13,8 @@ tkinter
 pyenv
 conf
 UserId
+gz
+KEYSTORE
+httpx
+Xfvb
+xvfb-run

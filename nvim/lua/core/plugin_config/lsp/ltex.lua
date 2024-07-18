@@ -13,7 +13,7 @@ S.dictionaries = {
     },
     falsePositives = {
       vim.fn.stdpath("config") .. "/.ltex/falsePositives/en.txt",
-    }
+    },
   },
 }
 S.mapping = {
@@ -86,7 +86,7 @@ local on_attach = function(client, bufnr)
   keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
   opts.desc = "Smart rename"
-  keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) 
+  keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
   opts.desc = "Show buffer diagnostics"
   keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
@@ -132,7 +132,7 @@ local on_attach = function(client, bufnr)
   vim.lsp.commands["_ltex.hideFalsePositives"] = addToDict("falsePositives")
 end
 -- 'pluging.config.lspconfig' is from NvChad configuraion
-lspconfig.ltex.setup({
+lspconfig.ltex.setup {
   on_attach = on_attach,
   capabilities = require("cmp_nvim_lsp").default_capabilities(),
   filetypes = { "tex", "markdown", "py" },
@@ -153,4 +153,4 @@ lspconfig.ltex.setup({
       },
     },
   },
-})
+}

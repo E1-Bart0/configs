@@ -17,7 +17,7 @@ bufferline.setup {
 
 local wk = require("which-key")
 
-wk.register {
-  ["L"] = { ":BufferLineCycleNext<CR>", "Next Buffer" },
-  ["H"] = { ":BufferLineCyclePrev<CR>", "Next Buffer" },
+wk.add {
+  { "H", ":BufferLineCyclePrev<CR>", desc = "Next Buffer" },
+  { "L", ":BufferLineCycleNext<CR>", desc = "Next Buffer" },
 }

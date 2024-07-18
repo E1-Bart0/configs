@@ -19,11 +19,14 @@ require("yanky").setup {
 
 local wk = require("which-key")
 
-wk.register {
-  ["[y"] = { "<Plug>(YankyCycleForward)", "Next YankyHistory" },
-  ["]y"] = { "<Plug>(YankyCycleForward)", "Previous YankyHistory" },
-  ["p"] = { "<Plug>(YankyPutAfter)", "Put After Cursor", mode = { "n", "x" } },
-  ["P"] = { "<Plug>(YankyPutBefore)", "Put Before Cursor", mode = { "n", "x" } },
-  ["gp"] = { "<Plug>(YankyGPutAfter)", "Put After Cursor and leave the Cursor", mode = { "n", "x" } },
-  ["gP"] = { "<Plug>(YankyGPutBefore)", "Put Before Cursor and leave the Cursor", mode = { "n", "x" } },
+wk.add {
+  { "[y", "<Plug>(YankyCycleForward)", desc = "Next YankyHistory" },
+  { "]y", "<Plug>(YankyCycleForward)", desc = "Previous YankyHistory" },
+  {
+    mode = { "n", "x" },
+    { "P", "<Plug>(YankyPutBefore)", desc = "Put Before Cursor" },
+    { "gP", "<Plug>(YankyGPutBefore)", desc = "Put Before Cursor and leave the Cursor" },
+    { "gp", "<Plug>(YankyGPutAfter)", desc = "Put After Cursor and leave the Cursor" },
+    { "p", "<Plug>(YankyPutAfter)", desc = "Put After Cursor" },
+  },
 }
