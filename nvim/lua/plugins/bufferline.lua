@@ -10,10 +10,6 @@ return {
 
       bufferline.setup {
         options = {
-          buffer_close_icon = "󰅖",
-          modified_icon = "●",
-          close_icon = "",
-          mode = "buffers", -- set to "tabs" to only show tabpages instead
           offsets = {
             {
               filetype = "NvimTree",
@@ -27,6 +23,8 @@ return {
       wk.add {
         { "H", ":BufferLineCyclePrev<CR>", desc = "Next Buffer" },
         { "L", ":BufferLineCycleNext<CR>", desc = "Next Buffer" },
+        { "<leader>bl", ":BufferLinePick<CR>", desc = "Pick Buffer" },
+        { "<leader>bc", ":BufferLineCloseOthers<CR>", desc = "Close others Buffers" },
       }
     end,
   },

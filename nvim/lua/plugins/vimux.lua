@@ -17,7 +17,7 @@ return {
         { "<leader>vo", "<cmd>VimuxOpenRunner<CR>", desc = "Open tmux runner" },
         {
           "<leader>vp",
-          '<cmd>VimuxRunCommand("clear;PYTHONPATH=\\"${PYTHONPATH}:${pwd}\\" python " . bufname("%"))<CR>',
+          '<cmd>VimuxRunCommand("clear;python -m " . substitute(substitute(expand("%:.") , "/", ".", "g"), ".py", "", "g"))<CR>',
           desc = "Python run current file",
         },
         { "<leader>vq", "<cmd>VimuxCloseRunner<CR>", desc = "Close tmux runner" },

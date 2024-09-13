@@ -54,6 +54,16 @@ return {
       local on_attach = require("plugins.lsp.utils.keymaps").on_attach
       local lspconfig = require("lspconfig")
 
+      -- Setup default keymaps for all servers
+      for lsp, value in pairs(servers) do
+        if value == "auto" then
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+          }
+        end
+      end
+
       -- Custom configuration
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
@@ -74,17 +84,6 @@ return {
           },
         },
       }
-
-      -- Setup default keymaps for all servers
-      for lsp, value  in ipairs(servers) do
-        if (value == "auto")
-        then
-            lspconfig[lsp].setup {
-              on_attach = on_attach,
-              capabilities = capabilities,
-            }
-        end
-      end
 
       -- PYTHON
       -- Ruff
@@ -180,7 +179,6 @@ return {
           },
         },
       }
-
     end,
   },
 }

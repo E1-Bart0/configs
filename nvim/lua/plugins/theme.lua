@@ -1,7 +1,15 @@
 return {
   {
-    "dracula/vim",
+    "Mofiqul/dracula.nvim",
     priority = 1000,
+    config = function()
+      require("dracula").setup {
+        lualine_bg_color = "#44475a",
+      }
+
+      -- Set theme
+      vim.cmd([[ colorscheme dracula ]])
+    end,
   },
 
   -- Lualine
@@ -11,7 +19,7 @@ return {
       require("lualine").setup {
         options = {
           icons_enabled = true,
-          theme = "dracula",
+          theme = "dracula-nvim",
         },
         sections = {
           lualine_a = {
