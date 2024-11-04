@@ -152,7 +152,7 @@ export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
 ZSH_DOTENV_PROMPT=false
 
 # Launching Tmux
-if [ "$TMUX" = "" ]; then tmux; fi
+# if [ "$TMUX" = "" ]; then tmux; fi
 
 
 ## Python

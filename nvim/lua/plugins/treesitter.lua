@@ -10,6 +10,7 @@ return {
         "css",
         "gitcommit",
         "gitignore",
+        "go",
         "html",
         "javascript",
         "json",

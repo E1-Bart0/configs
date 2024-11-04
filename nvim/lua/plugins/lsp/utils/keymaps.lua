@@ -3,6 +3,7 @@ local opts = { noremap = true, silent = true }
 
 local signature_setup = {
   bind = true, -- This is mandatory, otherwise border config won't get registered.
+  floating_window = false,
   handler_opts = {
     border = "rounded",
   },

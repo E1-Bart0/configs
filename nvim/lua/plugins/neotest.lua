@@ -3,6 +3,7 @@ return {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/neotest-python",
+      "fredrikaverpil/neotest-golang",
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -44,6 +45,7 @@ return {
             -- instances for files containing a parametrize mark (default: false)
             pytest_discover_instances = true,
           },
+          require("neotest-golang") {},
         },
       }
 

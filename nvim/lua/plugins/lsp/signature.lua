@@ -12,9 +12,9 @@ return {
         {
           "<leader>k",
           function()
-            vim.lsp.buf.signature_help()
+            require('lsp_signature').toggle_float_win()
           end,
-          desc = "Format file or range (in visual mode)",
+          desc = "Signature help",
           mode = { "n" },
         },
       }

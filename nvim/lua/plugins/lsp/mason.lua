@@ -21,6 +21,8 @@ local servers = {
   basedpyright = "configured",
   pylsp = "configured", -- :PylspInstall pylsp-mypy
   ruff_lsp = "configured",
+  -- Go
+  gopls = "configured",
 }
 local tools = {
   "eslint_d", -- js linter
@@ -175,6 +177,24 @@ return {
               typeCheckingMode = "off",
               useLibraryCodeForTypes = true,
               ignore = { "*" },
+            },
+          },
+        },
+      }
+
+      -- Go
+      lspconfig.gopls.setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "hotmpl" },
+        root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
+        settings = {
+          gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+            analyses = {
+              unusedvariable = true,
             },
           },
         },

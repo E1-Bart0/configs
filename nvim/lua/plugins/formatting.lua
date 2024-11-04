@@ -9,7 +9,9 @@ return {
           bash = { "beautysh" },
           css = { "prettier" },
           docker = { "prettier" },
+          go = { "gopls" },
           graphql = { "prettier" },
+          hcl = { "terragrunt_hclfmt" },
           html = { "prettier" },
           javascript = { "prettier" },
           javascriptreact = { "prettier" },
@@ -29,11 +31,12 @@ return {
         format_on_save = nil,
         formatters = {
           ruff = {
-            prepend_args = { "format", "--config", "/Users/vadim/.config/nvim/pyproject.toml" },
+            prepend_args = { "format", "--config", vim.fn.expand("~/.config/nvim/pyproject.toml") },
           },
           sqlfluff = {
             command = "sqlfluff",
-            args = { "fix", "--config", "/Users/vadim/.config/nvim/pyproject.toml", "$FILENAME" },
+            args = { "fix", "--config", vim.fn.expand("~/.config/nvim/pyproject.toml"), "$FILENAME" },
+            stdin = false,
           },
         },
       }
