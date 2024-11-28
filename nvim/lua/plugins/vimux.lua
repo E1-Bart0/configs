@@ -20,6 +20,11 @@ return {
           '<cmd>VimuxRunCommand("clear;python -m " . substitute(substitute(expand("%:.") , "/", ".", "g"), ".py", "", "g"))<CR>',
           desc = "Python run current file",
         },
+        {
+          "<leader>vg",
+          '<cmd>VimuxRunCommand("clear;go run " . expand("%:."))<CR>',
+          desc = "Golang run current file",
+        },
         { "<leader>vq", "<cmd>VimuxCloseRunner<CR>", desc = "Close tmux runner" },
         { "<leader>vr", "<cmd>VimuxPromptCommand<CR>", desc = "Prompt a command to run" },
         { "<leader>vx", "<cmd>VimuxInterruptRunner<CR>", desc = "Interrupt command in the runner" },

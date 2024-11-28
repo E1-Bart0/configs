@@ -20,7 +20,7 @@ local servers = {
   -- Python
   basedpyright = "configured",
   pylsp = "configured", -- :PylspInstall pylsp-mypy
-  ruff_lsp = "configured",
+  ruff= "configured",
   -- Go
   gopls = "configured",
 }
@@ -89,7 +89,7 @@ return {
 
       -- PYTHON
       -- Ruff
-      lspconfig.ruff_lsp.setup {
+      lspconfig.ruff.setup {
         on_attach = on_attach,
         capabilities = capabilities,
         init_options = {
@@ -192,7 +192,7 @@ return {
         settings = {
           gopls = {
             completeUnimported = true,
-            usePlaceholders = true,
+            usePlaceholders = false,
             analyses = {
               unusedvariable = true,
             },
