@@ -1,11 +1,15 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Vadim's nix-darwin system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -13,6 +17,7 @@
     nix-darwin,
     nixpkgs,
     nix-homebrew,
+    home-manager,
   }: let
     configuration = {
       pkgs,
@@ -36,7 +41,7 @@
         pkgs.postman
         pkgs.pyenv
         pkgs.ripgrep
-        pkgs.tmux
+        pkgs.vscode
       ];
 
       homebrew = {
@@ -47,6 +52,8 @@
         ];
         casks = [
          "macfuse"
+         "wireshark"
+         "zen-browser"
         ];
         masApps = {
           "Bitwarden" = 1352778147;
@@ -56,9 +63,11 @@
         onActivation.upgrade = true;
       };
 
+      # Fonts
       fonts.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
       ];
+
       # To Create an alias for searching
       system.activationScripts.applications.text = let
         env = pkgs.buildEnv {
@@ -82,8 +91,8 @@
 
       # System Default options
       system.defaults = {
+        finder.AppleShowAllExtensions = true;
         controlcenter.BatteryShowPercentage = true;
-        # NSGlobalDomain._HIHideMenuBar = true;
         dock.autohide = true;
         dock.persistent-apps = [
           "/System/Applications/Launchpad.app"
@@ -92,11 +101,13 @@
           "/Applications/Zen Browser.app"
         ];
         finder.FXPreferredViewStyle = "clmv";
+        screensaver.askForPasswordDelay = 10;
       };
       system.keyboard = {
         enableKeyMapping = true;
         remapCapsLockToEscape = true;
       };
+      security.pam.enableSudoTouchIdAuth = true;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
@@ -107,14 +118,15 @@
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 5;
-
       # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
+      # nixpkgs.hostPlatform = "x86_64-darwin";
     };
   in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#yandex
     darwinConfigurations."yandex" = nix-darwin.lib.darwinSystem {
+      # The platform the configuration will be used on.
+      system = "aarch64-darwin";
       modules = [
         configuration
         nix-homebrew.darwinModules.nix-homebrew
@@ -131,6 +143,42 @@
 
             autoMigrate = true;
           };
+        }
+        home-manager.darwinModules.home-manager
+        {
+          users.users.starova1.home = "/Users/starova1";
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
+          home-manager.users.starova1 = import ./home.nix;
+        }
+      ];
+    };
+
+    # Epam's mac book pro 13
+    darwinConfigurations."Vadims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+      system = "x86_64-darwin";
+      modules = [
+        configuration
+        nix-homebrew.darwinModules.nix-homebrew
+        {
+          nix-homebrew = {
+            # Install Homebrew under the default prefix
+            enable = true;
+
+            # User owning the Homebrew prefix
+            user = "starova1";
+
+            autoMigrate = true;
+          };
+        }
+        home-manager.darwinModules.home-manager
+        {
+          users.users.starova1.home = "/Users/starova1";
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
+          home-manager.users.starova1 = import ./home.nix;
         }
       ];
     };

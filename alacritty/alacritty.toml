@@ -22,7 +22,7 @@
 import = ["~/.config/alacritty/themes/dracula/dracula.toml"]
 
 [window]
-opacity = 0.9
+opacity = 0.99
 
 padding.x = 10
 padding.y = 10

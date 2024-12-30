@@ -1,8 +1,7 @@
 /*
 /*/
 !alacritty/
-!home-manager/
 !nix/
 !nvim/
-!tmux/
-!zsh/
+!README.md
+
