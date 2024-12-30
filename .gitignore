@@ -1,6 +1,8 @@
 /*
 /*/
-!nvim
+!alacritty/
+!home-manager/
+!nix/
 !nvim/
 !tmux/
 !zsh/

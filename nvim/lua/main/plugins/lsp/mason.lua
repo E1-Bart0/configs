@@ -20,7 +20,7 @@ local servers = {
   -- Python
   basedpyright = "configured",
   pylsp = "configured", -- :PylspInstall pylsp-mypy
-  ruff= "configured",
+  ruff = "configured",
   -- Go
   gopls = "configured",
 }
@@ -53,7 +53,7 @@ return {
       }
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local on_attach = require("plugins.lsp.utils.keymaps").on_attach
+      local on_attach = require("main.plugins.lsp.utils.keymaps").on_attach
       local lspconfig = require("lspconfig")
 
       -- Setup default keymaps for all servers
@@ -186,11 +186,13 @@ return {
       lspconfig.gopls.setup {
         capabilities = capabilities,
         on_attach = on_attach,
-        cmd = { "gopls" },
+        -- cmd = { "ya", "tool", "gopls" },
         filetypes = { "go", "gomod", "gowork", "hotmpl" },
         root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
         settings = {
           gopls = {
+            -- directoryFilters = { "-", "+[/Users/starova1/arcadia/baremetal/]" },
+            -- expandWorkspaceToModule = false,
             completeUnimported = true,
             usePlaceholders = false,
             analyses = {
