@@ -84,7 +84,7 @@ return {
         desc = "Go to next change",
       },
     }
-    -- Arc
+    -- Arc (Git)
     wk.add {
       {
         "<leader>hp",
@@ -103,25 +103,21 @@ return {
       {
         "<leader>hs",
         function()
-          vscode.action("arc.stageChange", {
-            range = { vim.fn.line(".") - 1, vim.fn.line(".") - 1 },
-          })
+          vscode.action("arc.stage", { group = "inline" })
         end,
         desc = "Arcadia: Stage change",
       },
       {
         "<leader>hS",
         function()
-          vscode.action("arc.stage", {
-            range = { vim.fn.line(".") - 1, vim.fn.line(".") - 1 },
-          })
+          vscode.action("arc.stage", { group = "inline" })
         end,
         desc = "Arcadia: Stage File",
       },
       {
         "<leader>hu",
         function()
-          vscode.action("arc.unstage")
+          vscode.action("arc.unstage", { group = "inline" })
         end,
         desc = "Arcadia: Unstage change",
       },
@@ -135,8 +131,8 @@ return {
       {
         "<leader>hr",
         function()
-          vscode.action("arc.revertChange")
-          -- vscode.action("git.revertSelectedRanges")
+          vscode.notify("Revert change")
+          vscode.action("arc.revertChange", { group = "inline" })
         end,
         desc = "Arcadia: Revert change",
       },
@@ -242,6 +238,18 @@ return {
           vscode.action("terminal.focus")
         end,
         desc = "Terminal focus",
+      },
+      {
+        "<leader>vg",
+        function()
+          vscode.action("workbench.action.terminal.sendSequence", {
+            args = {
+              text = "clear; go run '${file}'"
+            },
+          })
+          vscode.action("terminal.focus")
+        end,
+        desc = "Golang run current file",
       },
     }
 

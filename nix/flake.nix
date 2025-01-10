@@ -119,12 +119,14 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 5;
       # The platform the configuration will be used on.
-      # nixpkgs.hostPlatform = "x86_64-darwin";
+      # nixpkgs.hostPlatform = "aarch64-darwin";
     };
   in {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#yandex
-    darwinConfigurations."yandex" = nix-darwin.lib.darwinSystem {
+
+    # Yandex's MacBook Pro 16
+    darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
       # The platform the configuration will be used on.
       system = "aarch64-darwin";
       modules = [
@@ -155,7 +157,7 @@
       ];
     };
 
-    # Epam's mac book pro 13
+    # Epam's MacBook Pro 13
     darwinConfigurations."Vadims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       system = "x86_64-darwin";
       modules = [
