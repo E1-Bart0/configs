@@ -72,7 +72,7 @@
     shellAliases = {
       ll = "ls -l";
       nv = "nvim";
-      update = "darwin-rebuild switch --flake ~/.config/nix";
+      update = "nix flake update; darwin-rebuild switch --flake ~/.config/nix";
       ya = "$HOME/arcadia/ya";
     };
 

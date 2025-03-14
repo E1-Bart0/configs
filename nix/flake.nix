@@ -38,9 +38,11 @@
         pkgs.mkalias
         pkgs.neovim
         pkgs.obsidian
+        pkgs.poetry
         pkgs.postman
         pkgs.pyenv
         pkgs.ripgrep
+        pkgs.terraform
         pkgs.vscode
       ];
 
@@ -107,7 +109,7 @@
         enableKeyMapping = true;
         remapCapsLockToEscape = true;
       };
-      security.pam.enableSudoTouchIdAuth = true;
+      security.pam.services.sudo_local.touchIdAuth = true;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
@@ -186,3 +188,4 @@
     };
   };
 }
+
