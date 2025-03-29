@@ -35,6 +35,7 @@
         pkgs.grpcurl
         pkgs.home-manager
         pkgs.htop
+        pkgs.kubectl
         pkgs.mkalias
         pkgs.neovim
         pkgs.obsidian

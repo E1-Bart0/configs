@@ -18,10 +18,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -34,8 +30,12 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    pkgs.tmux
+    pkgs.bash-completion
+    pkgs.bashInteractive
     pkgs.oh-my-zsh
+    pkgs.tmux
+    pkgs.zsh
+    pkgs.zsh-completions
     pkgs.zsh-powerlevel10k
   ];
 
@@ -56,23 +56,33 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/ycp/bin"
     "$PYENV_ROOT/bin"
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
   ];
+
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    package = pkgs.bashInteractive;
+  };
 
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
+    package = pkgs.zsh;
     initExtra = ''
       eval "$(pyenv init -)"
+      fpath+='$HOME/.zfunc'
     '';
 
     shellAliases = {
       ll = "ls -l";
       nv = "nvim";
-      update = "nix flake update; darwin-rebuild switch --flake ~/.config/nix";
+      update-nix = "nix flake update; nix flake update home-manager";
+      update = "darwin-rebuild switch --flake ~/.config/nix";
       ya = "$HOME/arcadia/ya";
     };
 
@@ -86,7 +96,7 @@
       PYTHON_AUTO_VRUN=true;
       PYTHON_VENV_NAME=".venv";
       # tmux
-      ZSH_TMUX_AUTOSTART=true;
+      ZSH_TMUX_AUTOSTART=false;
     };
 
     oh-my-zsh = {
@@ -120,6 +130,16 @@
           repo = "zsh-nix-shell";
           rev = "v0.8.0";
           sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+        };
+      }
+      {
+        name = "zsh-async";
+        file = "async.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "mafredri";
+          repo = "zsh-async";
+          rev = "v1.8.6";
+          sha256 = "Js/9vGGAEqcPmQSsumzLfkfwljaFWHJ9sMWOgWDi0NI=";
         };
       }
     ];
