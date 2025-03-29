@@ -96,7 +96,7 @@
       PYTHON_AUTO_VRUN=true;
       PYTHON_VENV_NAME=".venv";
       # tmux
-      ZSH_TMUX_AUTOSTART=false;
+      ZSH_TMUX_AUTOSTART=true;
     };
 
     oh-my-zsh = {
