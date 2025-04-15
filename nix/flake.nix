@@ -110,7 +110,16 @@
         enableKeyMapping = true;
         remapCapsLockToEscape = true;
       };
+      # Touch ID
       security.pam.services.sudo_local.touchIdAuth = true;
+      # Touch ID in tmux
+      environment = {
+        etc."pam.d/sudo_local".text = ''
+          # Managed by Nix Darwin
+          auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so ignore_ssh
+          auth       sufficient     pam_tid.so
+        '';
+      };
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";

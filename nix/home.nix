@@ -83,7 +83,6 @@
       nv = "nvim";
       update-nix = "nix flake update; nix flake update home-manager";
       update = "darwin-rebuild switch --flake ~/.config/nix";
-      ya = "$HOME/arcadia/ya";
     };
 
     history.size = 10000;
@@ -199,6 +198,7 @@
       set -g default-terminal "tmux-256color"
       set -ag terminal-overrides ",xterm-256color:RGB"
       set-window-option -g mode-keys vi
+      set -as terminal-features ",*:hyperlinks"
     '';
   };
   
@@ -207,6 +207,25 @@
     userName = "Vadim Starovoitov";
     userEmail = "starovoitov.vadik1@gmail.com";
   };
+
+  # programs.ghostty = {
+  #   enable = true;
+  #   settings = {
+  #     font-size = 11;
+  #     font-family = "JetBrainsMono Nerd Font";
+  #
+  #     # The default is a bit intense for my liking
+  #     # but it looks good with some themes
+  #     unfocused-split-opacity = 0.96;
+  #
+  #     # Some macOS settings
+  #     window-theme = "dark";
+  #     macos-option-as-alt = true;
+  #
+  #     # Disables ligatures
+  #     font-feature = ["-liga" "-dlig" "-calt"];
+  #   };
+  # };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
