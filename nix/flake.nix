@@ -38,6 +38,7 @@
         pkgs.kubectl
         pkgs.mkalias
         pkgs.neovim
+        pkgs.nodejs_23
         pkgs.obsidian
         pkgs.poetry
         pkgs.postman
@@ -45,18 +46,17 @@
         pkgs.ripgrep
         pkgs.terraform
         pkgs.vscode
+        pkgs.wireshark
       ];
 
       homebrew = {
         enable = true;
         brews = [
-          "node"
           "clang-format"
         ];
         casks = [
-         "macfuse"
-         "wireshark"
-         "zen-browser"
+          "macfuse"
+          # "zen-browser"
         ];
         masApps = {
           "Bitwarden" = 1352778147;
@@ -132,6 +132,7 @@
       system.stateVersion = 5;
       # The platform the configuration will be used on.
       # nixpkgs.hostPlatform = "aarch64-darwin";
+      # system.primaryUser = "starova1";
     };
   in {
     # Build darwin flake using:

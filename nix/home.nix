@@ -113,6 +113,8 @@
         zstyle ':completion:*' completer _expand _complete _ignored _approximate _expand_alias
         zstyle ':autocomplete:*' default-context curcontext 
         zstyle ':autocomplete:*' min-input 0
+        zstyle ':completion:*:make:*:targets' call-command true
+        zstyle ':completion:*:*:make:*' tag-order 'targets'
 
         setopt HIST_FIND_NO_DUPS
 
@@ -223,10 +225,12 @@
   };
 
   # programs.ghostty = {
-  #   enable = true;
+  #   enable = false;
+  #   installVimSyntax = true;
   #   settings = {
   #     font-size = 11;
   #     font-family = "JetBrainsMono Nerd Font";
+  #     theme = "dracula";
   #
   #     # The default is a bit intense for my liking
   #     # but it looks good with some themes
