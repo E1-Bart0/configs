@@ -10,25 +10,34 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = inputs @ {
-    self,
-    nix-darwin,
-    nixpkgs,
-    nix-homebrew,
-    home-manager,
-  }: let
-    configuration = {
-      pkgs,
-      config,
-      ...
-    }: {
-      # Allow unfree licensee
-      nixpkgs.config.allowUnfree = true;
+  outputs = inputs @ { self, nix-darwin, nixpkgs, nix-homebrew, home-manager, flake-utils, ... }: let
+    forAllSystems = flake-utils.lib.eachDefaultSystem (system: {
+      legacyPackages = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = _: true;
+        };
+      };
+    });
 
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
+    configuration = { pkgs, config, ... }: {
+      # Central user configuration
+      users.users.starova1 = {
+        home = "/Users/starova1";
+        name = "starova1";
+        description = "Primary user account";
+      };
+      
+      nixpkgs.config = {
+        allowUnfree = true;
+        allowUnfreePredicate = _: true;
+      };
+
+      # System-level packages (not user-specific)
       environment.systemPackages = [
         pkgs.alacritty
         pkgs.go
@@ -131,72 +140,38 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 5;
       # The platform the configuration will be used on.
-      # nixpkgs.hostPlatform = "aarch64-darwin";
-      # system.primaryUser = "starova1";
     };
-  in {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#yandex
-
-    # Yandex's MacBook Pro 16
-    darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      # The platform the configuration will be used on.
-      system = "aarch64-darwin";
+    darwinSystem = system: nix-darwin.lib.darwinSystem {
+      inherit system;
       modules = [
         configuration
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
-            # Install Homebrew under the default prefix
             enable = true;
-
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            enableRosetta = true;
-
-            # User owning the Homebrew prefix
+            enableRosetta = system == "aarch64-darwin";
             user = "starova1";
-
             autoMigrate = true;
           };
         }
         home-manager.darwinModules.home-manager
         {
-          users.users.starova1.home = "/Users/starova1";
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.users.starova1 = import ./home.nix;
-        }
-      ];
-    };
-
-    # Epam's MacBook Pro 13
-    darwinConfigurations."Vadims-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      system = "x86_64-darwin";
-      modules = [
-        configuration
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            # Install Homebrew under the default prefix
-            enable = true;
-
-            # User owning the Homebrew prefix
-            user = "starova1";
-
-            autoMigrate = true;
+          home-manager.users.starova1 = { config, ... }: {
+            imports = [./home.nix];
+            home.username = "starova1";
+            home.homeDirectory = "/Users/starova1";
           };
         }
-        home-manager.darwinModules.home-manager
-        {
-          users.users.starova1.home = "/Users/starova1";
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "backup";
-          home-manager.users.starova1 = import ./home.nix;
-        }
       ];
     };
-  };
+  in (forAllSystems // {
+    darwinConfigurations = {
+      "MacBook-Pro" = darwinSystem "aarch64-darwin";
+      "Vadims-MacBook-Pro" = darwinSystem "x86_64-darwin";
+    };
+  });
 }
 
