@@ -110,7 +110,7 @@
           "/System/Applications/Launchpad.app"
           "${pkgs.alacritty}/Applications/Alacritty.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
-          "/Applications/Zen Browser.app"
+          "/Applications/Zen.app"
         ];
         finder.FXPreferredViewStyle = "clmv";
         screensaver.askForPasswordDelay = 10;
