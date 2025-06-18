@@ -7,7 +7,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
@@ -31,6 +31,7 @@
         name = "starova1";
         description = "Primary user account";
       };
+      system.primaryUser = "starova1";
       
       nixpkgs.config = {
         allowUnfree = true;
@@ -39,15 +40,15 @@
 
       # System-level packages (not user-specific)
       environment.systemPackages = [
-        pkgs.alacritty
         pkgs.go
         pkgs.grpcurl
         pkgs.home-manager
         pkgs.htop
+        pkgs.jsonnet
         pkgs.kubectl
         pkgs.mkalias
         pkgs.neovim
-        pkgs.nodejs_23
+        pkgs.nodejs_24
         pkgs.obsidian
         pkgs.poetry
         pkgs.postman
@@ -68,8 +69,8 @@
           # "zen-browser"
         ];
         masApps = {
-          "Bitwarden" = 1352778147;
-          "CopyClip" = 595191960;
+          # "Bitwarden" = 1352778147;
+          # "CopyClip" = 595191960;
         };
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
@@ -108,7 +109,7 @@
         dock.autohide = true;
         dock.persistent-apps = [
           "/System/Applications/Launchpad.app"
-          "${pkgs.alacritty}/Applications/Alacritty.app"
+          "${pkgs.ghostty-bin}/Applications/Ghostty.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
           "/Applications/Zen.app"
         ];

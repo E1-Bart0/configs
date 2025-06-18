@@ -14,10 +14,7 @@
   ];
 
   home.sessionPath = [
-    "$HOME/.local/bin"
     "$HOME/ycp/bin"
-    "$PYENV_ROOT/bin"
-    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
   ];
 
   programs.bash = {
@@ -32,15 +29,17 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     package = pkgs.zsh;
-    initExtra = ''
+    initContent = ''
       eval "$(pyenv init -)"
       fpath+="$HOME/.zfunc"
       compinit
+      eval "$(fzf --zsh)"
     '';
 
     shellAliases = {
       ll = "ls -la";
       nv = "nvim";
+      ya = "~/arcadia/ya";
     };
 
     history.size = 10000;
@@ -52,6 +51,7 @@
       PYTHON_AUTO_VRUN=true;
       PYTHON_VENV_NAME=".venv";
       ZSH_TMUX_AUTOSTART=false;
+      ZVM_INIT_MODE="sourcing";
     };
 
     oh-my-zsh = {
@@ -62,7 +62,6 @@
         "poetry"
         "python"
         "tmux"
-        "vi-mode"
         "z"
       ];
       extraConfig = ''
@@ -76,21 +75,27 @@
         # disable sort when completing `git checkout`
         zstyle ':completion:*:arc-checkout:*' sort false
         zstyle ':completion:*:git-checkout:*' sort false
+
         # set descriptions format to enable group support
         # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
         zstyle ':completion:*:descriptions' format '[%d]'
+
         # set list-colors to enable filename colorizing
         # zstyle ':completion:*' list-colors $((s.:.)LS_COLORS)
         # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
         zstyle ':completion:*' menu no
+
         # preview directory's content with eza when completing cd
         zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
         # custom fzf flags
         # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
         zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+
         # To make fzf-tab follow FZF_DEFAULT_OPTS.
         # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
         zstyle ':fzf-tab:*' use-fzf-default-opts yes
+
         # switch group using `<` and `>`
         zstyle ':fzf-tab:*' switch-group '<' '>'
         zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup

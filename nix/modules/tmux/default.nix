@@ -5,7 +5,7 @@
   
   programs.tmux = {
     enable = true;
-    terminal = "tmux-256color";
+    terminal = "screen-256color";
     historyLimit = 100000;
     prefix = "C-s";
     mouse = true;
@@ -51,7 +51,7 @@
       bind C-l send-keys 'C-l'
       
       set -g default-command ${pkgs.zsh}/bin/zsh
-      set -g default-terminal "tmux-256color"
+      set -g default-terminal "screen-256color"
       set -ag terminal-overrides ",xterm-256color:RGB"
       set-window-option -g mode-keys vi
       set -as terminal-features ",*:hyperlinks"

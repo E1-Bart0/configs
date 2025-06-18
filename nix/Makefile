@@ -5,7 +5,7 @@ update:
 
 .PHONY: update
 upgrade:
-	@darwin-rebuild switch --flake ~/.config/nix
+	@sudo darwin-rebuild switch --flake ~/.config/nix
 
 .PHONY: all
 all: update upgrade
