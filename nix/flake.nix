@@ -23,15 +23,18 @@
         };
       };
     });
+    
+    # Import centralized user configuration
+    userConfig = import ./modules/user/default.nix;
 
     configuration = { pkgs, config, ... }: {
       # Central user configuration
-      users.users.starova1 = {
-        home = "/Users/starova1";
-        name = "starova1";
-        description = "Primary user account";
+      users.users.${userConfig.username} = {
+        home = userConfig.homeDirectory;
+        name = userConfig.username;
+        description = userConfig.description;
       };
-      system.primaryUser = "starova1";
+      system.primaryUser = userConfig.username;
       
       nixpkgs.config = {
         allowUnfree = true;
@@ -151,7 +154,7 @@
           nix-homebrew = {
             enable = true;
             enableRosetta = system == "aarch64-darwin";
-            user = "starova1";
+            user = userConfig.username;
             autoMigrate = true;
           };
         }
@@ -160,10 +163,10 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.users.starova1 = { config, ... }: {
+          home-manager.users.${userConfig.username} = { config, ... }: {
             imports = [./home.nix];
-            home.username = "starova1";
-            home.homeDirectory = "/Users/starova1";
+            home.username = userConfig.username;
+            home.homeDirectory = userConfig.homeDirectory;
           };
         }
       ];

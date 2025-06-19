@@ -2,6 +2,10 @@
 
 # Manual https://nix-community.github.io/home-manager/options.xhtml
 
+let
+  # Import centralized user configuration
+  userConfig = import ./modules/user/default.nix;
+in
 {
   imports = [
     ./modules/fzf/default.nix
@@ -11,8 +15,9 @@
     ./modules/tmux/default.nix
   ];
 
-  home.username = "starova1";
-  home.homeDirectory = "/Users/starova1";
+  # Use centralized user configuration
+  home.username = userConfig.username;
+  home.homeDirectory = userConfig.homeDirectory;
   home.stateVersion = "25.05";
 
   home.packages = [
