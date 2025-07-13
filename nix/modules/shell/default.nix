@@ -40,6 +40,7 @@
       ll = "ls -la";
       nv = "nvim";
       ya = "~/arcadia/ya";
+      cd = "z";
     };
 
     history.size = 10000;
@@ -62,7 +63,6 @@
         "poetry"
         "python"
         "tmux"
-        "z"
       ];
       extraConfig = ''
         zstyle ':completion:*' completer _expand _complete _ignored _approximate _expand_alias
@@ -105,7 +105,7 @@
         autoload -Uz compinit
         compinit
 
-        setopt autocd
+        # setopt autocd
         setopt globdots
       '';
     };

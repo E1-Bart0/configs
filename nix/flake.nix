@@ -57,6 +57,7 @@
         pkgs.postman
         pkgs.pyenv
         pkgs.ripgrep
+        pkgs.telegram-desktop
         pkgs.terraform
         pkgs.vscode
         pkgs.wireshark

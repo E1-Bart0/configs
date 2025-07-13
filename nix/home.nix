@@ -13,6 +13,7 @@ in
     ./modules/git/default.nix
     ./modules/shell/default.nix
     ./modules/tmux/default.nix
+    ./modules/zoxide/default.nix
   ];
 
   # Use centralized user configuration
