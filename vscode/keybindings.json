@@ -1,0 +1,45 @@
+[
+  {
+    "key": "ctrl-h",
+    "command": "workbench.action.navigateLeft",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl-l",
+    "command": "workbench.action.navigateRight",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl-j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
+    "key": "ctrl-k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "ctrl-m",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+
+  {
+    "key": "ctrl-z",
+    "command": "workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl-shift-z",
+    "command": "workbench.action.toggleMaximizedPanel"
+  },
+
+  // Sugestions
+  {
+    "key": "tab",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+  },
+  {
+    "key": "shift+tab",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+  }
+]

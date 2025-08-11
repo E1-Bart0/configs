@@ -34,6 +34,16 @@
       fpath+="$HOME/.zfunc"
       compinit
       eval "$(fzf --zsh)"
+
+      load_env() {
+        if [ -f $1 ]; then
+          set -a
+          source $1
+          set +a
+        else
+          echo "Warning: $1 file not found"
+        fi
+      }
     '';
 
     shellAliases = {

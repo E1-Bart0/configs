@@ -10,7 +10,7 @@ return {
     wk.add {
       { "<leader>+", "<C-a>", desc = "Increment number" },
       { "<leader>-", "<C-x>", desc = "Decrement number" },
-      { "x", '"_x', desc = "Not save in clipboard" },
+      { "x", '"_x', desc = "Not save in clipboard", mode = { "n", "x" } },
       {
         "<leader>nh",
         function()
@@ -244,7 +244,7 @@ return {
         function()
           vscode.action("workbench.action.terminal.sendSequence", {
             args = {
-              text = "clear; go run '${file}'"
+              text = "clear; go run '${file}'",
             },
           })
           vscode.action("terminal.focus")

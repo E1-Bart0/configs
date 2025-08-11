@@ -1,0 +1,114 @@
+{
+  "workbench.colorTheme": "Dracula Theme",
+  "files.autoSave": "onFocusChange",
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.hover.enabled": true,
+  "editor.lineNumbers": "relative",
+  "editor.scrollBeyondLastLine": true, // recommended by neovim
+  "editor.stickyScroll.enabled": false,
+  // to split long line. Just visual split
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wrappingIndent": "same",
+  "editor.wordWrapColumn": 120,
+
+  // Neovim
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+
+  // Formaters and LSP
+  "makefile.configureOnOpen": true,
+  "database-client.autoSync": true,
+  "clang-format.style": "{ IndentWidth: 4, BasedOnStyle: google, AlignConsecutiveAssignments: true }",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Go linting in Yandex
+  "gopls": {
+    "formatting.local": "a.yandex-team.ru"
+  },
+  "go.lintOnSave": "off",
+  "go.vetFlags": [
+    "-vettool={expanded_go_path_env}/src/a.yandex-team.ru/library/go/yolint/cmd/yolint/yolint"
+  ],
+  "go.formatTool": "gofmt",
+  "go.vetOnSave": "package",
+  "go.inlayHints.assignVariableTypes": true,
+  "go.inlayHints.compositeLiteralFields": true,
+  "go.inlayHints.compositeLiteralTypes": true,
+  "go.inlayHints.constantValues": true,
+  "go.inlayHints.functionTypeParameters": true,
+  "go.testExplorer.enable": true,
+  "editor.inlayHints.enabled": "on",
+  "testExplorer.testRunner": "go test",
+
+  // Terminal
+  "terminal.integrated.profiles.osx": {
+    //...existing profiles...
+    "tmux-shell": {
+      "path": "tmux",
+      "args": ["new-session", "-A", "-s", "vscode:${workspaceFolder}"]
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.stickyScroll.enabled": true,
+  "terminal.integrated.suggest.enabled": true,
+  "terminal.external.osxExec": "",
+  "[proto3]": {
+    "editor.defaultFormatter": "xaver.clang-format"
+  },
+  "vscode-neovim.logOutputToConsole": true,
+  "vscode-neovim.neovimExecutablePaths.darwin": "/run/current-system/sw/bin/nvim",
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+
+  // Python
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSaveMode": "file"
+  },
+  "python.analysis.autoImportCompletions": true,
+
+  //
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.exclude": {
+    "**/__pycache__": true
+  },
+  "roo-cline.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "jupyter.askForKernelRestart": false,
+  "mypy.checkNotebooks": true,
+  "mypy.runUsingActiveInterpreter": true,
+  "python.analysis.autoFormatStrings": true,
+  "search.useParentIgnoreFiles": true,
+  "git.autofetch": true,
+  "yandex-code-assist.agent.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "pythonTestExplorer.testFramework": "pytest",
+}

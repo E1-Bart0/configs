@@ -20,7 +20,7 @@ return {
     wk.add {
       { "<leader>+", "<C-a>", desc = "Increment number" },
       { "<leader>-", "<C-x>", desc = "Decrement number" },
-      { "x", '"_x', desc = "Not save in clipboard" },
+      { "x", '"_x', desc = "Not save in clipboard", mode = { "n", "x" } },
     }
 
     -- Keymaping
