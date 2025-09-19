@@ -155,6 +155,13 @@ return {
     -- LSP
     wk.add {
       {
+        "gi",
+        function()
+          vscode.action("editor.action.goToImplementation")
+        end,
+        desc = "Go implementation",
+      },
+      {
         "<C-k>",
         function()
           vscode.action("editor.action.showHover")
@@ -173,6 +180,7 @@ return {
         function()
           vscode.action("editor.action.codeAction")
         end,
+        mode = { "n", "x" },
         desc = "Code actions",
       },
       {

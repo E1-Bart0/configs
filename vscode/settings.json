@@ -89,12 +89,12 @@
     "**/__pycache__": true
   },
   "roo-cline.allowedCommands": [
-    "npm test",
-    "npm install",
-    "tsc",
     "git log",
     "git diff",
-    "git show"
+    "git show",
+    "npm test",
+    "npm install",
+    "tsc"
   ],
   "jupyter.askForKernelRestart": false,
   "mypy.checkNotebooks": true,
@@ -111,4 +111,7 @@
     "git show"
   ],
   "pythonTestExplorer.testFramework": "pytest",
+  "roo-cline.deniedCommands": [],
+  "window.dialogStyle": "native",
+  "notebook.lineNumbers": "on",
 }
