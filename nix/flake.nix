@@ -60,7 +60,6 @@
         pkgs.telegram-desktop
         pkgs.terraform
         pkgs.vscode
-        pkgs.wireshark
       ];
 
       homebrew = {
@@ -70,7 +69,6 @@
         ];
         casks = [
           "macfuse"
-          # "zen-browser"
         ];
         masApps = {
           # "Bitwarden" = 1352778147;

@@ -1,7 +1,11 @@
 {
   programs.git = {
     enable = true;
-    userName = "Vadim Starovoitov";
-    userEmail = "starovoitov.vadik1@gmail.com";
+    settings = {
+      user = {
+        name = "Vadim Starovoitov";
+        email = "starovoitov.vadik1@gmail.com";
+      };
+    };
   };
 }
