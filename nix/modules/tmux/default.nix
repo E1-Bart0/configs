@@ -14,12 +14,13 @@
     escapeTime = 10;
 
     plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
       better-mouse-mode
-      sensible
-      yank
       continuum
+      extrakto
       resurrect
+      sensible
+      vim-tmux-navigator
+      yank
       {
         plugin = dracula;
         extraConfig = ''

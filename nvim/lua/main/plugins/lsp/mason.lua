@@ -54,20 +54,26 @@ return {
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local on_attach = require("main.plugins.lsp.utils.keymaps").on_attach
-      local lspconfig = require("lspconfig")
 
       -- Setup default keymaps for all servers
       for lsp, value in pairs(servers) do
         if value == "auto" then
-          lspconfig[lsp].setup {
+          vim.lsp.config[lsp] = {
+            cmd = { lsp },
+            filetypes = vim.lsp.config[lsp] and vim.lsp.config[lsp].filetypes or {},
+            root_dir = vim.fs.root(0, { ".git" }),
             on_attach = on_attach,
             capabilities = capabilities,
           }
+          vim.lsp.enable(lsp)
         end
       end
 
       -- Custom configuration
-      lspconfig.lua_ls.setup {
+      vim.lsp.config.lua_ls = {
+        cmd = { "lua-language-server" },
+        filetypes = { "lua" },
+        root_dir = vim.fs.root(0, { ".git", ".luarc.json", ".stylua.toml" }),
         capabilities = capabilities,
         on_attach = on_attach,
         settings = { -- custom settings for lua
@@ -86,10 +92,14 @@ return {
           },
         },
       }
+      vim.lsp.enable("lua_ls")
 
       -- PYTHON
       -- Ruff
-      lspconfig.ruff.setup {
+      vim.lsp.config.ruff = {
+        cmd = { "ruff", "server" },
+        filetypes = { "python" },
+        root_dir = vim.fs.root(0, { "pyproject.toml", "setup.py", "setup.cfg", ".git" }),
         on_attach = on_attach,
         capabilities = capabilities,
         init_options = {
@@ -100,6 +110,7 @@ return {
           },
         },
       }
+      vim.lsp.enable("ruff")
 
       -- Pylsp
       local venv_path = os.getenv("VIRTUAL_ENV")
@@ -111,7 +122,10 @@ return {
         py_path = vim.g.python3_host_prog
       end
 
-      lspconfig.pylsp.setup {
+      vim.lsp.config.pylsp = {
+        cmd = { "pylsp" },
+        filetypes = { "python" },
+        root_dir = vim.fs.root(0, { "pyproject.toml", "setup.py", "setup.cfg", ".git" }),
         on_attach = function(...) end,
         capabilities = capabilities,
         settings = {
@@ -159,9 +173,13 @@ return {
           debounce_text_changes = 200,
         },
       }
+      vim.lsp.enable("pylsp")
 
       -- Pyright
-      lspconfig.basedpyright.setup {
+      vim.lsp.config.basedpyright = {
+        cmd = { "basedpyright-langserver", "--stdio" },
+        filetypes = { "python" },
+        root_dir = vim.fs.root(0, { "pyproject.toml", "setup.py", "setup.cfg", ".git" }),
         handlers = {
           ["textDocument/publishDiagnostics"] = function(...) end,
         },
@@ -181,14 +199,16 @@ return {
           },
         },
       }
+      vim.lsp.enable("basedpyright")
 
       -- Go
-      lspconfig.gopls.setup {
+      vim.lsp.config.gopls = {
+        cmd = { "gopls" },
         capabilities = capabilities,
         on_attach = on_attach,
         -- cmd = { "ya", "tool", "gopls" },
         filetypes = { "go", "gomod", "gowork", "hotmpl" },
-        root_dir = require("lspconfig/util").root_pattern("go.work", "go.mod", ".git"),
+        root_dir = vim.fs.root(0, { "go.work", "go.mod", ".git" }),
         settings = {
           gopls = {
             -- directoryFilters = { "-", "+[/Users/starova1/arcadia/baremetal/]" },
@@ -201,6 +221,7 @@ return {
           },
         },
       }
+      vim.lsp.enable("gopls")
     end,
   },
 }

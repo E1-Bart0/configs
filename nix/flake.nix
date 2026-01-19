@@ -54,12 +54,12 @@
         pkgs.nodejs_24
         pkgs.obsidian
         pkgs.poetry
-        pkgs.postman
         pkgs.pyenv
         pkgs.ripgrep
         pkgs.telegram-desktop
         pkgs.terraform
         pkgs.vscode
+        pkgs.yandex-cloud
       ];
 
       homebrew = {
@@ -68,7 +68,7 @@
           "clang-format"
         ];
         casks = [
-          "macfuse"
+          # "macfuse"
         ];
         masApps = {
           # "Bitwarden" = 1352778147;
@@ -88,7 +88,7 @@
         env = pkgs.buildEnv {
           name = "system-applications";
           paths = config.environment.systemPackages;
-          pathsToLink = "/Applications";
+          pathsToLink = [ "/Applications" ];
         };
       in
         pkgs.lib.mkForce ''
@@ -110,7 +110,7 @@
         controlcenter.BatteryShowPercentage = true;
         dock.autohide = true;
         dock.persistent-apps = [
-          "/System/Applications/Launchpad.app"
+          "/Applications/LaunchNext.app"
           "${pkgs.ghostty-bin}/Applications/Ghostty.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
           "/Applications/Zen.app"

@@ -2,7 +2,7 @@
   "workbench.colorTheme": "Dracula Theme",
   "files.autoSave": "onFocusChange",
   "security.workspace.trust.untrustedFiles": "open",
-  "editor.hover.enabled": true,
+  "editor.hover.enabled": "on",
   "editor.lineNumbers": "relative",
   "editor.scrollBeyondLastLine": true, // recommended by neovim
   "editor.stickyScroll.enabled": false,
@@ -53,7 +53,6 @@
       "args": ["new-session", "-A", "-s", "vscode:${workspaceFolder}"]
     }
   },
-  "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "terminal.integrated.stickyScroll.enabled": true,
   "terminal.integrated.suggest.enabled": true,
@@ -102,16 +101,34 @@
   "python.analysis.autoFormatStrings": true,
   "search.useParentIgnoreFiles": true,
   "git.autofetch": true,
-  "yandex-code-assist.agent.allowedCommands": [
-    "npm test",
-    "npm install",
-    "tsc",
-    "git log",
-    "git diff",
-    "git show"
-  ],
   "pythonTestExplorer.testFramework": "pytest",
   "roo-cline.deniedCommands": [],
   "window.dialogStyle": "native",
+  "yandex-code-assist.allowedCommands": [
+    "git log",
+    "git diff",
+    "git show",
+    "npm test",
+    "npm install",
+    "tsc"
+  ],
+  "terminal.integrated.mouseWheelScrollSensitivity": 3,
+  "vscode-yandex-arc.yfmScrollSyncEnabled": false,
   "notebook.lineNumbers": "on",
+
+  //
+  "search.exclude": {
+    "**/Test*.input.json": true,
+    "**/Test*.output.json": true
+  },
+  "yandex-code-assist.deniedCommands": [],
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.useTerminal": true,
+  "obsidian-md-vsc.defaultVault": "Obsidian",
+  "obsidian-md-vsc.defaultVaultPath": "/Users/starova1/Yandex.Disk.localized/Obsidian",
+  "obsidian-md-vsc.defaultNote": "__Daily/2025-12-02",
+  "[dockercompose]": {
+    "editor.defaultFormatter": "docker.docker"
+  }
 }

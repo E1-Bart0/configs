@@ -47,10 +47,11 @@
     '';
 
     shellAliases = {
+      ai = "~/.local/bin/claude";
+      cd = "z";
       ll = "ls -la";
       nv = "nvim";
       ya = "~/arcadia/ya";
-      cd = "z";
     };
 
     history.size = 10000;
@@ -63,6 +64,7 @@
       PYTHON_VENV_NAME=".venv";
       ZSH_TMUX_AUTOSTART=false;
       ZVM_INIT_MODE="sourcing";
+      NODE_EXTRA_CA_CERTS="/etc/ssl/certs/YandexInternalCA.pem";
     };
 
     oh-my-zsh = {
