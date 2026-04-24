@@ -43,6 +43,7 @@
 
       # System-level packages (not user-specific)
       environment.systemPackages = [
+        pkgs.bruno
         pkgs.go
         pkgs.grpcurl
         pkgs.home-manager
@@ -56,8 +57,8 @@
         pkgs.poetry
         pkgs.pyenv
         pkgs.ripgrep
-        pkgs.telegram-desktop
         pkgs.terraform
+        pkgs.tree
         pkgs.vscode
         pkgs.yandex-cloud
       ];
@@ -68,7 +69,7 @@
           "clang-format"
         ];
         casks = [
-          # "macfuse"
+          "mos" # Trackpad: Natural scrolling (fingers follow content) && Mouse: Traditional scrolling (inverted)
         ];
         masApps = {
           # "Bitwarden" = 1352778147;

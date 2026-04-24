@@ -1,37 +1,73 @@
 [
+  // ============================================================================
+  // WINDOW NAVIGATION (Ctrl+hjkl)
+  // Works globally - complements Neovim's HL for tab navigation
+  // ============================================================================
   {
-    "key": "ctrl-h",
-    "command": "workbench.action.navigateLeft",
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown",
     "when": "!terminalFocus"
   },
   {
-    "key": "ctrl-l",
-    "command": "workbench.action.navigateRight",
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp",
     "when": "!terminalFocus"
-  },
-  {
-    "key": "ctrl-j",
-    "command": "workbench.action.navigateDown"
-  },
-  {
-    "key": "ctrl-k",
-    "command": "workbench.action.navigateUp"
-  },
-  {
-    "key": "ctrl-m",
-    "command": "workbench.action.toggleSidebarVisibility"
   },
 
+  // ============================================================================
+  // TERMINAL INTEGRATION 
+  // Ctrl+k navigates up to editor, Ctrl+j navigates between terminals
+  // Fix copy-pasting issue
+  // ============================================================================
   {
-    "key": "ctrl-z",
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "cmd+v",
+    "command": "workbench.action.terminal.paste",
+    "when": "terminalFocus"
+  },
+
+  // ============================================================================
+  // PANEL & SIDEBAR TOGGLES
+  // Also available in Neovim via Ctrl+m and Ctrl+z
+  // ============================================================================
+  {
+    "key": "ctrl+m",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+z",
     "command": "workbench.action.togglePanel"
   },
   {
-    "key": "ctrl-shift-z",
+    "key": "ctrl+s shift+z",
     "command": "workbench.action.toggleMaximizedPanel"
   },
+  {
+    "key": "ctrl+s z",
+    "command": "workbench.action.togglePanel",
+  },
 
-  // Sugestions
+  // ============================================================================
+  // SUGGESTIONS
+  // Works when suggestion widget is visible, doesn't interfere with Neovim
+  // ============================================================================
   {
     "key": "tab",
     "command": "selectNextSuggestion",
@@ -41,5 +77,13 @@
     "key": "shift+tab",
     "command": "selectPrevSuggestion",
     "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
-  }
+},
+{
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+        "text": "\u001b\r"
+    },
+    "when": "terminalFocus"
+}
 ]

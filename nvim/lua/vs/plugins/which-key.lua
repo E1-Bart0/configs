@@ -6,174 +6,190 @@ return {
     local vscode = require("vscode")
 
     wk.setup {}
-    --
+
+    -- ============================================================================
+    -- BASIC OPERATIONS
+    -- ============================================================================
     wk.add {
       { "<leader>+", "<C-a>", desc = "Increment number" },
       { "<leader>-", "<C-x>", desc = "Decrement number" },
-      { "x", '"_x', desc = "Not save in clipboard", mode = { "n", "x" } },
+      { "x", '"_x', desc = "Delete without clipboard", mode = { "n", "x" } },
       {
         "<leader>nh",
         function()
           vim.cmd("nohlsearch")
           vscode.action("workbench.files.action.refreshFilesExplorer")
         end,
-        desc = "Clear highlights",
+        desc = "Clear highlights & refresh explorer",
       },
     }
 
-    -- Splitting windows
+    -- ============================================================================
+    -- WINDOW MANAGEMENT
+    -- ============================================================================
     wk.add {
       { "<leader>s", group = "Split Window" },
-      { "<leader>se", "<C-w>=", desc = "Make split window equal width" },
-      { "<leader>sh", "<C-w>s", desc = "Split window horizontally" },
-      { "<leader>sq", ":close<CR>", desc = "Close current split window" },
-      { "<leader>sv", "<C-w>v", desc = "Split window vertically" },
+      { "<leader>se", "<C-w>=", desc = "Make splits equal width" },
+      { "<leader>sh", "<C-w>s", desc = "Split horizontally" },
+      { "<leader>sq", ":close<CR>", desc = "Close current split" },
+      { "<leader>sv", "<C-w>v", desc = "Split vertically" },
     }
 
-    -- Navigation
+    -- ============================================================================
+    -- NAVIGATION
+    -- ============================================================================
     wk.add {
+      -- Tab navigation (H/L) - complements VS Code's Ctrl+hjkl for windows
       {
         "H",
         function()
           vscode.action("workbench.action.previousEditorInGroup")
         end,
-        desc = "Go to previous tab",
+        desc = "Previous tab",
       },
       {
         "L",
         function()
           vscode.action("workbench.action.nextEditorInGroup")
         end,
-        desc = "Go to next tab",
+        desc = "Next tab",
       },
-      -- Problems
+      
+      -- Problems navigation
       {
         "[d",
         function()
           vscode.action("editor.action.marker.next")
         end,
-        desc = "Go to next problem",
+        desc = "Next problem",
       },
       {
         "]d",
         function()
           vscode.action("editor.action.marker.prev")
         end,
-        desc = "Go to previous probem",
+        desc = "Previous problem",
       },
       {
         "<leader>d",
         function()
           vscode.action("workbench.actions.view.problems")
         end,
-        desc = "Go to next tab",
+        desc = "Show problems panel",
       },
-      -- Changes
+      
+      -- Changes navigation
       {
         "[c",
         function()
           vscode.action("workbench.action.editor.previousChange")
         end,
-        desc = "Go to previouschange",
+        desc = "Previous change",
       },
       {
         "]c",
         function()
           vscode.action("workbench.action.editor.nextChange")
         end,
-        desc = "Go to next change",
+        desc = "Next change",
       },
     }
-    -- Arc (Git)
+
+    -- ============================================================================
+    -- ARC (VERSION CONTROL)
+    -- ============================================================================
     wk.add {
+      { "<leader>h", group = "Arc/Git" },
       {
         "<leader>hp",
         function()
           vscode.action("editor.action.dirtydiff.next")
         end,
-        desc = "Arcadia: Stage change",
+        desc = "Next hunk",
       },
       {
         "<leader>hd",
         function()
           vscode.action("arc.openChangeWithHead")
         end,
-        desc = "Arcadia: Stage change",
+        desc = "Diff with HEAD",
       },
       {
         "<leader>hs",
         function()
           vscode.action("arc.stage", { group = "inline" })
         end,
-        desc = "Arcadia: Stage change",
+        desc = "Stage change",
       },
       {
         "<leader>hS",
         function()
-          vscode.action("arc.stage", { group = "inline" })
+          vscode.action("arc.stageFile")
         end,
-        desc = "Arcadia: Stage File",
+        desc = "Stage file",
       },
       {
         "<leader>hu",
         function()
           vscode.action("arc.unstage", { group = "inline" })
         end,
-        desc = "Arcadia: Unstage change",
+        desc = "Unstage change",
       },
       {
         "<leader>hU",
         function()
           vscode.action("arc.unstageAll")
         end,
-        desc = "Arcadia: Unstage All",
+        desc = "Unstage all",
       },
       {
         "<leader>hr",
         function()
-          vscode.notify("Revert change")
+          vscode.notify("Reverting change...")
           vscode.action("arc.revertChange", { group = "inline" })
         end,
-        desc = "Arcadia: Revert change",
+        desc = "Revert change",
       },
       {
         "<leader>hR",
         function()
           vscode.action("arc.revertAll")
         end,
-        desc = "Arcadia: Revert file",
+        desc = "Revert file",
       },
       {
         "<leader>hb",
         function()
           vscode.action("arc.blame.toggleCurrentLineDecorations")
         end,
-        desc = "Arcadia: Blame Line",
+        desc = "Toggle blame",
       },
     }
 
-    -- LSP
+    -- ============================================================================
+    -- LSP & CODE ACTIONS
+    -- ============================================================================
     wk.add {
       {
         "gi",
         function()
           vscode.action("editor.action.goToImplementation")
         end,
-        desc = "Go implementation",
+        desc = "Go to implementation",
       },
       {
         "<C-k>",
         function()
           vscode.action("editor.action.showHover")
         end,
-        desc = "Show hower",
+        desc = "Show hover",
       },
       {
         "ff",
         function()
           vscode.action("editor.action.formatDocument")
         end,
-        desc = "Format file",
+        desc = "Format document",
       },
       {
         "<leader>ca",
@@ -188,11 +204,13 @@ return {
         function()
           vscode.action("editor.action.rename")
         end,
-        desc = "Rename",
+        desc = "Rename symbol",
       },
     }
 
-    -- Folding
+    -- ============================================================================
+    -- FOLDING
+    -- ============================================================================
     wk.add {
       {
         "zc",
@@ -238,14 +256,16 @@ return {
       },
     }
 
-    -- Terminal
+    -- ============================================================================
+    -- TERMINAL
+    -- ============================================================================
     wk.add {
       {
         "<leader>vo",
         function()
           vscode.action("terminal.focus")
         end,
-        desc = "Terminal focus",
+        desc = "Focus terminal",
       },
       {
         "<leader>vg",
@@ -257,12 +277,15 @@ return {
           })
           vscode.action("terminal.focus")
         end,
-        desc = "Golang run current file",
+        desc = "Run Go file",
       },
     }
 
-    -- Aka telescope
+    -- ============================================================================
+    -- FUZZY FINDER (Telescope-like)
+    -- ============================================================================
     wk.add {
+      { "<leader>f", group = "Find" },
       {
         "<leader>ff",
         function()
@@ -275,7 +298,7 @@ return {
         function()
           vscode.action("workbench.action.findInFiles")
         end,
-        desc = "Find text in file Focus",
+        desc = "Find text in files",
       },
       {
         "<leader>fT",

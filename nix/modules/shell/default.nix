@@ -47,8 +47,7 @@
     '';
 
     shellAliases = {
-      ai = "~/.local/bin/claude";
-      cd = "z";
+      claude = "~/.local/bin/claude";
       ll = "ls -la";
       nv = "nvim";
       ya = "~/arcadia/ya";

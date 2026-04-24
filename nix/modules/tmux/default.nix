@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [ pkgs.tmux ];
+  home.packages = [ 
+    pkgs.tmux
+    pkgs.reattach-to-user-namespace  # Add this for macOS clipboard
+  ];
   
   programs.tmux = {
     enable = true;
@@ -20,7 +23,14 @@
       resurrect
       sensible
       vim-tmux-navigator
-      yank
+      {
+              plugin = yank;
+              extraConfig = ''
+                # Use system clipboard
+                set -g @yank_selection_mouse 'clipboard'
+                set -g @yank_action 'copy-pipe-and-cancel'
+              '';
+      }
       {
         plugin = dracula;
         extraConfig = ''
@@ -50,6 +60,17 @@
 
     extraConfig = ''
       bind C-l send-keys 'C-l'
+
+      # Clipboard settings for macOS
+      set -g default-command "reattach-to-user-namespace -l ${pkgs.zsh}/bin/zsh"
+      set -g set-clipboard on
+      
+      # Better paste handling
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+      
+      # Allow passthrough for clipboard
+      set -g allow-passthrough on
       
       set -g default-command ${pkgs.zsh}/bin/zsh
       set -g default-terminal "screen-256color"
